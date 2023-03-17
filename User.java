@@ -3,7 +3,7 @@ package sc2002_assignment;
 import java.util.Scanner;
 import java.util.LinkedList;
 
-public class User {
+public abstract User {
 	private String userID;
 	private String password;
 	private String name;
@@ -33,8 +33,9 @@ public class User {
 		password = a.nextLine();
 	}
 	
-	public void viewAllProjects() {;}
-	public void viewAllRequests() {;} 
-	public void changeTitle() {;}
+	abstract public void viewAllProjects();
+	abstract public void viewAllRequests();
+	abstract public void changeTitle();
+	abstract public void displayOptions();
 	
 }
