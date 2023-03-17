@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author Dreamcore
+ *
+ */
+module miniproject {
+}
