@@ -4,7 +4,7 @@ import java.util.Scanner;
 import request.Request;
 import java.util.LinkedList;
 
-public class User {
+public abstract class User {
 	private String userID;
 	private String password;
 	private String name;
@@ -47,10 +47,10 @@ public class User {
 		this.email = email;
 	}	
 	
-	public void viewAllProjects() {;}
+	public abstract void viewAllProjects() {;}
 	public void viewAllRequests() {;} 
-	public void changeTitle() {;}
-	public void displayOptions() {;}
+	public abstract void changeTitle() {;}
+	public abstract void displayOptions() {;}
 	public void updateIncomingRequest(int senderIndex, boolean approval) {;}
 	public void updateOutgoingRequest(int senderIndex, boolean approval) {;}
 	
