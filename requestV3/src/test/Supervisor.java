@@ -69,6 +69,10 @@ public class Supervisor extends User{
 		
 	}
 	public void viewAllProject() {	
+		int i;
+		for (i = 0; i < projectArray.size(); i ++) {
+			System.out.println("Project ID: " + projectArray.get(i).getID() + " Title: " + projectArray.get(i).getTitle() + " Status: " + projectArray.get(i).getStatus());
+		}
 	}
 	
 	/*public void changeTitle() {
