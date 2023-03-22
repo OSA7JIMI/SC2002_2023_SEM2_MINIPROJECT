@@ -47,11 +47,33 @@ public abstract class User {
 		this.email = email;
 	}	
 	
-	public abstract void viewAllProjects() {;}
-	public void viewAllRequests() {;} 
-	public abstract void changeTitle() {;}
-	public abstract void displayOptions() {;}
-	public void updateIncomingRequest(int senderIndex, boolean approval) {;}
-	public void updateOutgoingRequest(int senderIndex, boolean approval) {;}
+	public abstract void viewAllProjects() 
+	public abstract void changeTitle() 
+	public abstract void displayOptions() 
+	
+	public void updateIncomingRequest(int requestID, boolean approval) {		
+	}
+	
+	public void updateOutgoingRequest(int requestID, boolean approval) {
+	}
+	
+	public void viewAllRequests() {
+		System.out.println("Request History: \n");
+		for(int i=0; i<incoming.size(); i++) {
+			System.out.println("Sender: "+incoming.get(i).senderID);
+			System.out.println("Type: "+incoming.get(i).type);
+			if(incoming.get(i).pending) {System.out.println("Status: Pending");}
+			else if(incoming.get(i).approval) {System.out.println("Status: Approved");}
+			else {System.out.println("Status: Rejected");}
+		}
+		
+		for(int i=0; i<outgoing.size(); i++) {
+			System.out.println("Receiver: "+outgoing.get(i).receiverID);
+			System.out.println("Type: "+outgoing.get(i).type);
+			if(outgoing.get(i).pending) {System.out.println("Status: Pending");}
+			else if(outgoing.get(i).approval) {System.out.println("Status: Approved");}
+			else {System.out.println("Status: Rejected");}		
+		}
+	} 
 	
 }
