@@ -9,10 +9,8 @@ public class Supervisor extends User{
 	private ArrayList<Project> projectArray = new ArrayList<Project>();
 	private int numProject;
 	private int numProjectCreated = 0;
-	private ArrayList<Request> outgoingRequest = new ArrayList<Request>();
-	private ArrayList<Request> incomingRequest = new ArrayList<Request>();
 	private int outgoingRequestIndex = 0;
-	private Supervisor FYPcoor;
+	private boolean isFYP = false;
 	
 	Scanner sc = new Scanner(System.in);
 	
@@ -23,10 +21,10 @@ public class Supervisor extends User{
 	}
 	
 	//NEW
-	public void setFYPcoor(Supervisor FYPcoor) {
-		this.FYPcoor = FYPcoor;
+	public setFYP() {
+		isFYP = true;
 	}
-	
+		
 	//NEW
 	public void addToIncomingRequest(Request r) {
 		incomingRequest.add(r);
@@ -48,16 +46,6 @@ public class Supervisor extends User{
 		incomingRequest.set(i, r);
 	}
 	
-	//NEW
-	public void viewAllIncoming() {
-		for(int i=0; i<incomingRequest.size(); i++) {
-			System.out.println("SenderID: "+incomingRequest.get(i).senderID);
-			System.out.println("ReceiverID: "+incomingRequest.get(i).receiverID);
-			System.out.println("Type: "+incomingRequest.get(i).type);
-			System.out.println("Approval: "+incomingRequest.get(i).approval);
-			System.out.println("Pending: "+incomingRequest.get(i).pending);
-		}
-	}
 	//NEW
 	public void createProject() {
 		System.out.println("Enter project title");
@@ -108,11 +96,6 @@ public class Supervisor extends User{
 		System.out.println("Please enter the replacement supervisorId");
 		int replacementId = sc.nextInt();
 	}
-	/*
-	public void managePendingRequest() {
-		
-	}
-	public void viewAllHisRequest() {
-		
-	}*/
+	
+	
 }
