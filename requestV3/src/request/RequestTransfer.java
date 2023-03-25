@@ -3,16 +3,22 @@ package request;
 import test.Supervisor;
 
 public class RequestTransfer extends Request{
-	Supervisor replacementS;
-	public RequestTransfer(Supervisor s, int senderIndex) {
+	int replacementID;
+	int projectIDtoTransfer;
+	public RequestTransfer(int projectID, int supervisorID) {
 		this.pending = true;
 		this.type = 3;
-		this.senderIndex = senderIndex;
-		this.replacementS = s;
+		this.replacementID = supervisorID;
+		this.projectIDtoTransfer = projectID;
 	}
 	@Override
 	public void settleRequest(boolean approval) {
 		this.pending = false;
 		this.approval = approval;
+		if(approval==true) {
+			Project p = DatabaseProjectAccessor.getProject(projectIDtoTransfer);
+			p.setSupervisor(replacementID);
+			DatabaseProjectAccessor.updateProjectInDatabase(p);
+		}
 	}
 }
