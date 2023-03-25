@@ -9,8 +9,8 @@ public abstract class User {
 	private String password;
 	private String name;
 	private String email;
-	private LinkedList <Request> incoming;
-	private LinkedList<Request> outgoing;
+	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	User(String ID) {
 		userID = ID;
@@ -47,9 +47,9 @@ public abstract class User {
 		this.email = email;
 	}	
 	
-	public abstract void viewAllProjects() 
-	public abstract void changeTitle() 
-	public abstract void displayOptions() 
+	//public abstract void viewAllProjects();
+	//public abstract void changeTitle() ;
+	//public abstract void displayOptions(); 
 	
 	public void updateIncomingRequest(int requestID, boolean approval) {		
 	}
@@ -59,19 +59,21 @@ public abstract class User {
 	
 	public void viewAllRequests() {
 		System.out.println("Request History: \n");
-		for(int i=0; i<incoming.size(); i++) {
-			System.out.println("Sender: "+incoming.get(i).senderID);
-			System.out.println("Type: "+incoming.get(i).type);
-			if(incoming.get(i).pending) {System.out.println("Status: Pending");}
-			else if(incoming.get(i).approval) {System.out.println("Status: Approved");}
+		for(int i=0; i<incomingRequest.size(); i++) {
+			Request r = DatabaseRequestAccessor.getRequest(incomingRequest.get(i));
+			System.out.println("Sender: "+r.senderID);
+			System.out.println("Type: "+r.type);
+			if(r.pending) {System.out.println("Status: Pending");}
+			else if(r.approval) {System.out.println("Status: Approved");}
 			else {System.out.println("Status: Rejected");}
 		}
 		
-		for(int i=0; i<outgoing.size(); i++) {
-			System.out.println("Receiver: "+outgoing.get(i).receiverID);
-			System.out.println("Type: "+outgoing.get(i).type);
-			if(outgoing.get(i).pending) {System.out.println("Status: Pending");}
-			else if(outgoing.get(i).approval) {System.out.println("Status: Approved");}
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			Request r = DatabaseRequestAccessor.getRequest(outgoingRequest.get(i));
+			System.out.println("Receiver: "+r.receiverID);
+			System.out.println("Type: "+r.type);
+			if(r.pending) {System.out.println("Status: Pending");}
+			else if(r.approval) {System.out.println("Status: Approved");}
 			else {System.out.println("Status: Rejected");}		
 		}
 	} 
