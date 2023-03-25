@@ -3,10 +3,9 @@ package request;
 import test.Project;
 
 public class RequestDeregister extends Request{
-	public RequestDeregister(int senderIndex) {
+	public RequestDeregister() {
 		this.pending = true;
 		this.type = 2;
-		this.senderIndex = senderIndex;
 	}
 	@Override
 	public void settleRequest(boolean approval) {
