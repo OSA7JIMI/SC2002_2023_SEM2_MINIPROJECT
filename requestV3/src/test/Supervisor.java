@@ -6,11 +6,13 @@ import databaseProject.DatabaseProjectAccessor;
 import request.Request;
 
 public class Supervisor extends User{
-	private ArrayList<Project> projectArray = new ArrayList<Project>();
+	private ArrayList<Integer> projectArray = new ArrayList<Integer>();
 	private int numProject;
 	private int numProjectCreated = 0;
-	private int outgoingRequestIndex = 0;
 	private boolean isFYP = false;
+	private Supervisor FYPcoor;
+	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	Scanner sc = new Scanner(System.in);
 	
@@ -21,29 +23,26 @@ public class Supervisor extends User{
 	}
 	
 	//NEW
-	public setFYP() {
+	public void setFYP() {
 		isFYP = true;
 	}
 		
 	//NEW
-	public void addToIncomingRequest(Request r) {
-		incomingRequest.add(r);
+	public void addToIncomingRequest(int index) {
+		incomingRequest.add(index);
 	}
 	
 	//NEW
 	public void settleIncomingRequest(int index) {
-		Request r = incomingRequest.get(index);
-		int i = incomingRequest.indexOf(r);
+		Request r = DatabaseRequestAccessor.getRequest(index);
 		System.out.println("Enter 0 to reject, 1 to approve");
 		int choice = sc.nextInt();
 		if(choice==0) {
 			r.settleRequest(false);
-			r.sender.updateOutgoingRequest(r.senderIndex, false);
 		}else {
 			r.settleRequest(true);
-			r.sender.updateOutgoingRequest(r.senderIndex, true);
 		}
-		incomingRequest.set(i, r);
+		
 	}
 	
 	//NEW
@@ -59,7 +58,7 @@ public class Supervisor extends User{
 	public void viewAllProject() {	
 		int i;
 		for (i = 0; i < projectArray.size(); i ++) {
-			System.out.println("Project ID: " + projectArray.get(i).getID() + "  Title: " + projectArray.get(i).getTitle() + "  Status: " + projectArray.get(i).getStatus());
+			System.out.println("Project ID: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getID() + "  Title: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getTitle() + "  Status: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getStatus());
 		}
 	}
 	
@@ -94,7 +93,12 @@ public class Supervisor extends User{
 		System.out.println("Please enter the projectID you want to transfer to another supervisor: ");
 		int projectID = sc.nextInt();
 		System.out.println("Please enter the replacement supervisorId");
-		int replacementId = sc.nextInt();
+		int replacementID = sc.nextInt();
+		Request r = new RequestTransfer(projectID, replacementID);
+		int index = DatabaseRequestAccessor.addRequest(r);
+		this.outgoingRequest.add(index);
+		//will change the line below after userarray is implemented
+		FYPcoor.addToIncomingRequest(index);
 	}
 	
 	
