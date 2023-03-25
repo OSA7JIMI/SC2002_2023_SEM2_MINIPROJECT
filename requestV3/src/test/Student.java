@@ -10,10 +10,11 @@ import request.RequestDeregister;
 
 public class Student extends User {
 	private Project p;
-	private ArrayList<Request> outgoingRequest = new ArrayList<Request>();
-	private int outgoingRequestIndex = 0;
 	private Supervisor s;
 	private Supervisor FYPcoor;
+	//STORES THE INDEX LOCATION OF THE REQUEST IN THE REQUESTARRAY
+	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	Scanner sc = new Scanner(System.in);
 	
@@ -55,55 +56,49 @@ public class Student extends User {
 	public void changeTitle() {
 		System.out.println("Enter new title");
 		String newTitle = sc.next();
-		Request r = new RequestChangeTitle(newTitle, outgoingRequestIndex);
-		r.sender = this;
+		Request r = new RequestChangeTitle(newTitle);
 		r.senderID = this.getUserID();
 		r.receiverID = s.getUserID();
-		outgoingRequest.add(r);
-		s.addToIncomingRequest(r);
-		outgoingRequestIndex++;
-	}
-	
-	//NEW
-	public void updateOutgoingRequest(int senderIndex, boolean approval) {
-		Request r = outgoingRequest.get(senderIndex);
-		r.settleRequest(approval);
+		int index = DatabaseRequestAccessor.addRequest(r);
+		r.requestIndex = index;
+		this.outgoingRequest.add(index);
+		s.addToIncomingRequest(index);
 	}
 	
 	//NEW
 	public void allocate() {
 		System.out.println("Enter projectID to be allocated");
 		int projectID = sc.nextInt();
-		Request r = new RequestAllocate(projectID, outgoingRequestIndex);
-		r.sender = this;
+		Request r = new RequestAllocate(projectID);
 		r.senderID = this.getUserID();
 		r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
-		outgoingRequest.add(r);
+		int index = DatabaseRequestAccessor.addRequest(r);
 		Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
-		s.addToIncomingRequest(r);
-		outgoingRequestIndex++;
+		this.incomingRequest.add(index);
+		s.addToIncomingRequest(index);
 	}
 	
 	//NEW
 	public void deregister() {
 		System.out.println("Deregistering project request sent");
-		Request r = new RequestDeregister(outgoingRequestIndex);
-		r.sender = this;
+		Request r = new RequestDeregister();
 		r.senderID = this.getUserID();
-		r.receiverID = s.getUserID();
-		outgoingRequest.add(r);
-		FYPcoor.addToIncomingRequest(r);
-		outgoingRequestIndex++;
+		r.receiverID = FYPcoor.getUserID();
+		int index = DatabaseRequestAccessor.addRequest(r);
+		outgoingRequest.add(index);
+		FYPcoor.addToIncomingRequest(index);
+
 	}
 	
 	
-	public void viewAllRequests() {
+	public void viewAllOutgoingRequests() {
 		for(int i=0; i<outgoingRequest.size(); i++) {
-			System.out.println("SenderID: "+outgoingRequest.get(i).senderID);
-			System.out.println("ReceiverID: "+outgoingRequest.get(i).receiverID);
-			System.out.println("Type: "+outgoingRequest.get(i).type);
-			System.out.println("Approval: "+outgoingRequest.get(i).approval);
-			System.out.println("Pending: "+outgoingRequest.get(i).pending);
+			Request r = DatabaseRequestAccessor.getRequest(this.outgoingRequest.get(i));
+			System.out.println("SenderID: "+r.senderID);
+			System.out.println("ReceiverID: "+r.receiverID);
+			System.out.println("Type: "+r.type);
+			System.out.println("Approval: "+r.approval);
+			System.out.println("Pending: "+r.pending);
 		}
 	}
 	
