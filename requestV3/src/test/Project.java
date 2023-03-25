@@ -37,5 +37,8 @@ public class Project {
 	public void setTitle(String newTitle) {
 		this.projectTitle = newTitle;
 	}
-	
+	//NEW
+	public void setSupervisor(int supervisorID) {
+		//GET SUPERVISOR FROM USERARRAY
+	}
 }
