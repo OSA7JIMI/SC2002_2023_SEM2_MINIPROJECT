@@ -4,11 +4,10 @@ import databaseProject.DatabaseProjectAccessor;
 import test.Project;
 
 public class RequestChangeTitle extends Request{
-	public RequestChangeTitle(String newTitle, int senderIndex) {
+	public RequestChangeTitle(String newTitle) {
 		this.pending = true;
 		this.type = 0;
 		this.Title = newTitle;
-		this.senderIndex = senderIndex;
 	}
 	@Override
 	public void settleRequest(boolean approval) {
@@ -21,5 +20,6 @@ public class RequestChangeTitle extends Request{
 			//Get user from userArray, then update their project with the
 			//setProject() method
 		}
+		DatabaseRequestAccessor.updateRequestInArray(this, requestIndex);
 	}
 }
