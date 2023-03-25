@@ -4,10 +4,9 @@ import databaseProject.DatabaseProjectAccessor;
 import test.Project;
 
 public class RequestAllocate extends Request{
-	public RequestAllocate(int projectID, int senderIndex) {
+	public RequestAllocate(int projectID) {
 		this.pending = true;
 		this.type = 1;
-		this.senderIndex = senderIndex;
 		this.projectID  = projectID;
 	}
 	@Override
