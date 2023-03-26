@@ -1,20 +1,25 @@
-package OOP_Group_Project;
+package test;
 
 import java.util.Scanner;
+import databaseProject.*;
+import databaseRequest.*;
+import UserArray.*;
 
 public class FYPCoordinator extends Supervisor{
 
 	public FYPCoordinator(String name, String email, String ID) {
 		super(name, email, ID);
 		this.isFYP = true;
+		
+	}
 	public void settleRequests(){
 		int i=0,j=1;
-		Scanncer sc = new Scanner(System.in);
-		for(int i=0;i<incoming.length;i++) {
-			if(incoming[i].getpending()==1) {
-				System.out.println("Request " + j + ": " + "type: " incoming[i].gettype() + 
-						"sender: " + DatabaseUserAccessor.getUser(incoming[i].getsenderindex())+
-						"Receiver: " + DatabaseUserAccessor.getUser(incoming[i].getreceiverindex()));
+		Scanner sc = new Scanner(System.in);
+		for(i=0;i<incomingRequest.size();i++) {
+			if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).pending == true) {
+				System.out.println("Request " + j + ": " + "type: " + DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).gettype() + 
+						"sender: " + DatabaseUserAccessor.getUser(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID)+
+						"Receiver: " + DatabaseUserAccessor.getUser(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).receiverID);
 				j++;
 			}
 			
@@ -27,17 +32,18 @@ public class FYPCoordinator extends Supervisor{
 		
 	}
 	public void viewAllRequests() {
-		DatabaseProjectAccessor.viewAllRequests();
+		
 	}
 	public void viewAllProjects() {
-		DatabaseProjectAccessor.viewAllProjects();
+		DatabaseProjectAccessor.viewAllProject();;
 	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
-		System.out.println("projectID: " p.getprojectID());
-		System.out.println("project title: " p.getprojectTitle());
-		System.out.println("Status: " p.getstatus());
+		System.out.println("projectID: " + p.getID());
+		System.out.println("project title: "  + p.getTitle());
+		System.out.println("Status: " + p.getStatus());
 		
 	}
 	
 }
+		
