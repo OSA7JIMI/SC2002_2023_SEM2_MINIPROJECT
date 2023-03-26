@@ -7,6 +7,9 @@ public class RequestDeregister extends Request{
 		this.pending = true;
 		this.type = 2;
 	}
+	public String getType() {
+		return "Deregistration";
+	}
 	@Override
 	public void settleRequest(boolean approval) {
 		this.pending = false;
