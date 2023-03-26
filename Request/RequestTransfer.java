@@ -13,6 +13,9 @@ public class RequestTransfer extends Request{
 		this.replacementID = supervisorID;
 		this.projectIDtoTransfer = projectID;
 	}
+	public String getType() {
+		return "Transfer";
+	}
 	@Override
 	public void settleRequest(boolean approval) {
 		this.pending = false;
