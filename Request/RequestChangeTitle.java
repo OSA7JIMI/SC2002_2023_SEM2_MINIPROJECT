@@ -10,6 +10,9 @@ public class RequestChangeTitle extends Request{
 		this.type = 0;
 		this.Title = newTitle;
 	}
+	public String getType() {
+		return "Change Title";
+	}
 	@Override
 	public void settleRequest(boolean approval) {
 		this.pending = false;
