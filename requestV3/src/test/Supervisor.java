@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import databaseProject.DatabaseProjectAccessor;
-import request.Request;
+import databaseProject.ProjectArray;
+import request.*;
+import databaseRequest.DatabaseRequestAccessor;
 
 public class Supervisor extends User{
 	protected ArrayList<Integer> projectArray = new ArrayList<Integer>();
@@ -55,7 +57,7 @@ public class Supervisor extends User{
 		numProjectCreated++;
 		
 	}
-	public void viewAllProject() {	
+	public void viewAllProjects() {	
 		int i;
 		for (i = 0; i < projectArray.size(); i ++) {
 			System.out.println("Project ID: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getID() + "  Title: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getTitle() + "  Status: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getStatus());
@@ -99,6 +101,40 @@ public class Supervisor extends User{
 		this.outgoingRequest.add(index);
 		//will change the line below after userarray is implemented
 		FYPcoor.addToIncomingRequest(index);
+	}
+	public void viewAllRequests() {
+		System.out.println("---Viewing all requests---");
+		
+		System.out.println("---Incoming requests---");
+		for(int i=0; i<incomingRequest.size(); i++) {
+			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestIndex);
+			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID);
+			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).projectID);
+			if(DatabaseRequestAccessor.getRequest(i).approval == true)
+				System.out.println("Status: Approval");
+			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
+				System.out.println("Status: Pending");
+			else
+				System.out.println("Status: Rejected");
+			
+			System.out.println("----------");
+		}
+		
+		System.out.println("---Outgoing requests---");
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).requestIndex);
+			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).senderID);
+			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).projectID);
+			if(DatabaseRequestAccessor.getRequest(i).approval == true)
+				System.out.println("Status: Approval");
+			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
+				System.out.println("Status: Pending");
+			else
+				System.out.println("Status: Rejected");
+			
+			System.out.println("----------");
+		}
+		
 	}
 	
 	
