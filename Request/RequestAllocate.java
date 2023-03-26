@@ -10,6 +10,9 @@ public class RequestAllocate extends Request{
 		this.type = 1;
 		this.projectID  = projectID;
 	}
+	public String getType() {
+		return "allocation";
+	}
 	@Override
 	public void settleRequest(boolean approval) {
 		this.pending = false;
