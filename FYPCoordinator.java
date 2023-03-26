@@ -17,7 +17,7 @@ public class FYPCoordinator extends Supervisor{
 		Scanner sc = new Scanner(System.in);
 		for(i=0;i<incomingRequest.size();i++) {
 			if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).pending == true) {
-				System.out.println("Request " + j + ": " + "type: " + DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).gettype() + 
+				System.out.println("Request " + j + ": " + "type: " + DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).getType() + 
 						"sender: " + DatabaseUserAccessor.getUser(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID)+
 						"Receiver: " + DatabaseUserAccessor.getUser(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).receiverID);
 				j++;
