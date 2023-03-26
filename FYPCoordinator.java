@@ -4,11 +4,9 @@ import java.util.Scanner;
 
 public class FYPCoordinator extends Supervisor{
 
-	public FYPCoordinator(String ID) {
-		super(String ID);
-		isFYP = true;
-		
-	}
+	public FYPCoordinator(String name, String email, String ID) {
+		super(name, email, ID);
+		this.isFYP = true;
 	public void settleRequests(){
 		int i=0,j=1;
 		Scanncer sc = new Scanner(System.in);
