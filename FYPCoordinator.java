@@ -36,7 +36,9 @@ public class FYPCoordinator extends Supervisor{
 	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
-		ProjectPrinter.print(p);
+		System.out.println("projectID: " p.getprojectID());
+		System.out.println("project title: " p.getprojectTitle());
+		System.out.println("Status: " p.getstatus());
 		
 	}
 	
