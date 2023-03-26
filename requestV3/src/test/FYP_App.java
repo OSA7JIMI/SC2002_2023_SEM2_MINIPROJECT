@@ -1,4 +1,4 @@
-package sc2002_assignment;
+package test;
 
 import java.util.Scanner;
 
