@@ -47,9 +47,9 @@ public abstract class User {
 		this.email = email;
 	}	
 	
-	//public abstract void viewAllProjects();
+	public abstract void viewAllProjects();
 	//public abstract void changeTitle() ;
-	//public abstract void displayOptions(); 
+	public abstract void displayOptions(); 
 	
 	public void updateIncomingRequest(int requestID, boolean approval) {		
 	}
