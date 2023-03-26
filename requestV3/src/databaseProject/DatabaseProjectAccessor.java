@@ -1,6 +1,7 @@
 package databaseProject;
 
 import test.Project;
+import databaseProject.*;
 
 public class DatabaseProjectAccessor {
 	public static void addProject(Project p) {
