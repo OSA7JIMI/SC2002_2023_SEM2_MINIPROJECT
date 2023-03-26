@@ -6,13 +6,13 @@ import databaseProject.DatabaseProjectAccessor;
 import request.Request;
 
 public class Supervisor extends User{
-	private ArrayList<Integer> projectArray = new ArrayList<Integer>();
-	private int numProject;
-	private int numProjectCreated = 0;
-	private boolean isFYP = false;
-	private Supervisor FYPcoor;
-	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
-	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
+	protected ArrayList<Integer> projectArray = new ArrayList<Integer>();
+	protected int numProject;
+	protected int numProjectCreated = 0;
+	protected boolean isFYP = false;
+	protected Supervisor FYPcoor;
+	protected ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	protected ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	Scanner sc = new Scanner(System.in);
 	
