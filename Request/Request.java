@@ -1,10 +1,9 @@
-package Request;
+package request;
 
-import Test.Project;
+import test.Project;
+import test.User;
 
-import Test.User;
-
-public class Request {
+public abstract class Request {
 	
 	public int requestIndex;
 	public String senderID;
@@ -20,4 +19,5 @@ public class Request {
 	public void settleRequest(boolean approval) {
 		return;
 	}
+	public abstract String getType();
 }
