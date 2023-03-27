@@ -54,7 +54,7 @@ public class FYPCoordinator extends Supervisor{
 				System.out.println("Enter project id:");
 				do {
 					projectid = sc.nextInt();
-				}while(projectid < 1 || projectid > DatabaseProjectAccessor.size);
+				}while(projectid < 1 || projectid > DatabaseProjectAccessor.getsize());
 				this.generateProjectDetails(projectid); // Need to minus 1 or not?
 			}
 			else {
