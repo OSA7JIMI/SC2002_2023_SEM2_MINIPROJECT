@@ -28,9 +28,7 @@ public class Student extends User {
 	}
 	
 	public void setFYPcoor(Supervisor FYPcoor) {
-		if(!deregistered) {
 			this.FYPcoor = FYPcoor;
-		}
 		
 	}
 	
@@ -62,15 +60,21 @@ public class Student extends User {
 	}
 	
 	public void allocate() {
-		System.out.println("Enter projectID to be allocated");
-		int projectID = sc.nextInt();
-		Request r = new RequestAllocate(projectID);
-		r.senderID = this.getUserID();
-		r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
-		int index = DatabaseRequestAccessor.addRequest(r);
-		Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
-		this.incomingRequest.add(index);
-		s.addToIncomingRequest(index);
+		if(!deregistered) {
+			System.out.println("Enter projectID to be allocated");
+			int projectID = sc.nextInt();
+			Request r = new RequestAllocate(projectID);
+			r.senderID = this.getUserID();
+			r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
+			int index = DatabaseRequestAccessor.addRequest(r);
+			Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
+			this.incomingRequest.add(index);
+			s.addToIncomingRequest(index);
+		}
+		else {
+			System.out.println("Since you have previously deregistered a project, you are not allowed to register for another one.");
+		}
+		
 	}
 	
 	public void deregister() {
