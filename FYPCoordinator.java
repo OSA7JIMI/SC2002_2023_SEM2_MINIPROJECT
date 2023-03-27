@@ -31,8 +31,40 @@ public class FYPCoordinator extends Supervisor{
 		
 		
 	}
+	public void displayOptions() {
+		int leave =0;
+		Scanncer sc = new Scanner(System.in);
+		while(!leave) {
+			System.outprintln("Enter /leave to leave FYP coordinator options");
+			System.outprintln("Enter /viewrequests to view all requests");
+			System.outprintln("Enter /viewprojects to view all projects");
+			System.outprintln("Enter /settlerequests to settle requests");
+			System.outprintln("Enter /projectdetails to generate project details of a project");
+			String choice = sc.nextline();
+			if(choice.equals("/leave")) {
+				leave=1;
+			}
+			else if(choice.equals("/viewrequests")) {
+				this.viewAllRequests();
+			}
+			else if(choice.equals("/viewprojects")) {
+				this.viewAllProjects();
+			}
+			else if(choice.equals("/projectdetails")) {
+				System.out.println("Enter project id:");
+				do {
+					projectid = sc.nextInt();
+				}while(projectid < 1 || projectid > DatabaseProjectAccessor.size);
+				this.generateProjectDetails(projectid); // Need to minus 1 or not?
+			}
+			else {
+				System.out.println("Invalid option chosen. Please try again.");
+			}
+		}
+	}
+						   
 	public void viewAllRequests() {
-		
+		DatabaseProjectAccessor.viewAllRequests();
 	}
 	public void viewAllProjects() {
 		DatabaseProjectAccessor.viewAllProject();;
