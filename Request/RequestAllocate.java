@@ -11,7 +11,7 @@ public class RequestAllocate extends Request{
 		this.projectID  = projectID;
 	}
 	public String getType() {
-		return "allocation";
+		return "Allocation";
 	}
 	@Override
 	public void settleRequest(boolean approval) {
