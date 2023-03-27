@@ -1,35 +1,70 @@
-package sc2002Project;
+package test;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import databaseProject.DatabaseProjectAccessor;
+import databaseProject.ProjectArray;
+import request.*;
+import databaseRequest.DatabaseRequestAccessor;
+
 public class Supervisor extends User{
-	private Project[] projectArray;
-	private int numProject;
-	private int numProjectCreated = 0;
-	public Supervisor () {
-		this.numProject = 0;
+	protected ArrayList<Integer> projectArray = new ArrayList<Integer>();
+	protected int numProject;
+	protected int numProjectCreated = 0;
+	protected boolean isFYP = false;
+	protected Supervisor FYPcoor;
+	protected ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	protected ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
+	
+	Scanner sc = new Scanner(System.in);
+	
+	Supervisor(String name, String email, String ID) {
+		super(ID);
+		this.setName(name);
+		this.setEmail(email);
 	}
-	public void createProject() {
-		System.out.println("Please key in the project title: ");
-		Scanner sc = new Scanner (System.in);
-		Project project = new Project();
-		projectArray[numProjectCreated ++] = project;
-		project.projectTitle = sc.nextLine();
-		project.s1 = this;
-		if(this.numProject >= 2) project.status = "unavailable";
-		else project.status = "available";
+	
+	//NEW
+	public void setFYP() {
+		isFYP = true;
+	}
 		
+	//NEW
+	public void addToIncomingRequest(int index) {
+		incomingRequest.add(index);
 	}
-	public void viewAllProject() {
-		int i;
-		for(i = 0; i < projectArray.length; i++) {
-			System.out.print("ProjectID: " + projectArray[0].projectID);
-			System.out.print("Project Title: " + projectArray[0].projectTitle);
-			System.out.print("Project Status" + projectArray[0].status);
-			System.out.println("Student: " + projectArray[0].s);
+	
+	//NEW
+	public void settleIncomingRequest(int index) {
+		Request r = DatabaseRequestAccessor.getRequest(index);
+		System.out.println("Enter 0 to reject, 1 to approve");
+		int choice = sc.nextInt();
+		if(choice==0) {
+			r.settleRequest(false);
+		}else {
+			r.settleRequest(true);
 		}
 		
 	}
-	public void changeTitle() {
+	
+	//NEW
+	public void createProject() {
+		System.out.println("Enter project title");
+		String title = sc.next();
+		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this);
+		DatabaseProjectAccessor.addProject(p);
+		projectArray.add(p);
+		numProjectCreated++;
+		
+	}
+	public void viewAllProjects() {	
+		int i;
+		for (i = 0; i < projectArray.size(); i ++) {
+			System.out.println("Project ID: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getID() + "  Title: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getTitle() + "  Status: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getStatus());
+		}
+	}
+	
+	/*public void changeTitle() {
 		int i;
 		System.out.println("You got these projects: ");
 		for(i = 0; i < projectArray.length; i++) {
@@ -55,21 +90,93 @@ public class Supervisor extends User{
 			System.out.print("Project Status" + projectArray[i].status);
 			System.out.println("Student: " + projectArray[i].s);
 		}
-	}
+	}*/
 	public void  transfer() {
 		System.out.println("Please enter the projectID you want to transfer to another supervisor: ");
-		Scanner sc = new Scanner (System.in);
 		int projectID = sc.nextInt();
 		System.out.println("Please enter the replacement supervisorId");
-		int replacementId = sc.nextInt();
-		Request request = new Request();
+		int replacementID = sc.nextInt();
+		Request r = new RequestTransfer(projectID, replacementID);
+		int index = DatabaseRequestAccessor.addRequest(r);
+		this.outgoingRequest.add(index);
+		//will change the line below after userarray is implemented
+		FYPcoor.addToIncomingRequest(index);
+	}
+	public void viewAllRequests() {
+		System.out.println("---Viewing all requests---");
 		
+		System.out.println("---Incoming requests---");
+		for(int i=0; i<incomingRequest.size(); i++) {
+			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestIndex);
+			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID);
+			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).projectID);
+			if(DatabaseRequestAccessor.getRequest(i).approval == true)
+				System.out.println("Status: Approval");
+			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
+				System.out.println("Status: Pending");
+			else
+				System.out.println("Status: Rejected");
+			
+			System.out.println("----------");
+		}
+		
+		System.out.println("---Outgoing requests---");
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).requestIndex);
+			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).senderID);
+			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).projectID);
+			if(DatabaseRequestAccessor.getRequest(i).approval == true)
+				System.out.println("Status: Approval");
+			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
+				System.out.println("Status: Pending");
+			else
+				System.out.println("Status: Rejected");
+			
+			System.out.println("----------");
+		}
+		
+	}
+	public void displayOptions() {
+			int leave =0;
+			while(leave == 0) {
+				System.out.println("Enter /leave to leave supervisor options");
+				System.out.println("Enter /viewrequests to view all requests");
+				System.out.println("Enter /viewprojects to view all projects");
+				System.out.println("Enter /createprojects to create objects");
+				System.out.println("Enter /viewrequesthistory to create objects");
+				System.out.println("Enter /transferproject to create objects");
+				
+				String choice = sc.nextLine();
+				if(choice.equals("/leave")) {
+					leave=1;
+				}
+				else if(choice.equals("/viewrequests")) {
+					this.viewAllRequests();
+				}
+				else if(choice.equals("/viewprojects")) {
+					this.viewAllProjects();
+				}
+				else if(choice.equals("/createprojects")) {
+					this.createProject();
+				}
+				else if(choice.equals("/settlerequests")) {
+					System.out.println("Enter the request ID you want to settle");
+					int ID = sc.nextInt();
+					this.settleIncomingRequest(ID);
+					//how to use student ID to select request?
+				}
+				//NEW
+				else if(choice.equals("/viewrequesthistory")) {
+					this.viewRequestHistory();
+				}
+				else if(choice.equals("/transferproject")) {
+					this.transfer();
+				}
+				else {
+					System.out.println("Invalid option chosen. Please try again.");
+				}
+			}
+		}
 	
-	}
-	public void managePendingRequest() {
-		
-	}
-	public void viewAllHisRequest() {
-		
-	}
+	
 }
