@@ -1,29 +1,45 @@
 package sc2002_assignment;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import databaseProject.DatabaseProjectAccessor;
+import request.Request;
+import request.RequestAllocate;
+import request.RequestChangeTitle;
+import request.RequestDeregister;
+
 public class Student extends User {
-	private String p;
+	private Project p;
+	private Supervisor s;
+	private Supervisor FYPcoor;
+	private boolean deregistered = false;
 	
+	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
-	Student(String name, String email, String ID, String password) {
-		super(name, email, ID, password); // make sure same order in User class
+	Scanner sc = new Scanner(System.in);
+	
+	Student(String name, String email, String ID) {
+		super(name, email, ID); 
 	}
 	
+	public void setProject(Project p) {
+		this.p = p;
+	}
 	
-	public void viewAllProject() {
-//		edit based on database 
-		
-		String[] database_array = new String[10];
-		database_array[0] = "a";
-		for(int i = 0; i<database_array.length; i++) {
-			System.out.println(database_array[i]);
+	public void setFYPcoor(Supervisor FYPcoor) {
+		if(!deregistered) {
+			this.FYPcoor = FYPcoor;
 		}
 		
 	}
 	
+	public void viewAllProject() {
+		DatabaseProjectAccessor.viewAllProject();
+	}
+	
 	
 	public void viewProject() {
-//		edit based on project class
 		
 		if (p == null) {
 			System.out.println("You have not selected a project.");
@@ -33,38 +49,51 @@ public class Student extends User {
 		}
 	}
 	
-	
 	public void changeTitle() {
-		Scanner s = new Scanner(System.in);
-	    System.out.println("Enter new title:");
-	    String newtitle = s.nextLine();
-	   
-//	    request the change in title  
+		System.out.println("Enter new title");
+		String newTitle = sc.next();
+		Request r = new RequestChangeTitle(newTitle);
+		r.senderID = this.getUserID();
+		r.receiverID = s.getUserID();
+		int index = DatabaseRequestAccessor.addRequest(r);
+		r.requestIndex = index;
+		this.outgoingRequest.add(index);
+		s.addToIncomingRequest(index);
 	}
-	
 	
 	public void allocate() {
-		Scanner x = new Scanner(System.in);
-		System.out.println("Select your project:");
-		String projselected = x.nextLine();
-	
-//		send request
-		System.out.println("Registering project request sent");
+		System.out.println("Enter projectID to be allocated");
+		int projectID = sc.nextInt();
+		Request r = new RequestAllocate(projectID);
+		r.senderID = this.getUserID();
+		r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
+		int index = DatabaseRequestAccessor.addRequest(r);
+		Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
+		this.incomingRequest.add(index);
+		s.addToIncomingRequest(index);
 	}
-	
 	
 	public void deregister() {
 		System.out.println("Deregistering project request sent");
-		
-//		send request
+		Request r = new RequestDeregister();
+		r.senderID = this.getUserID();
+		r.receiverID = FYPcoor.getUserID();
+		int index = DatabaseRequestAccessor.addRequest(r);
+		outgoingRequest.add(index);
+		FYPcoor.addToIncomingRequest(index);
+		deregistered = true;
+
 	}
 	
 	
-	public void viewAllRequests() {
-		String[] database_arrayR = new String[10];
-		database_arrayR[0] = "a";
-		for(int i = 0; i<database_arrayR.length; i++) {
-			System.out.println(database_arrayR[i]);
+	public void viewAllOutgoingRequests() {
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			Request r = DatabaseRequestAccessor.getRequest(this.outgoingRequest.get(i));
+			System.out.println("SenderID: "+r.senderID);
+			System.out.println("ReceiverID: "+r.receiverID);
+			System.out.println("Type: "+r.type);
+			System.out.println("Approval: "+r.approval);
+			System.out.println("Pending: "+r.pending);
 		}
 	}
 	
