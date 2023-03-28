@@ -3,15 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import databaseProject.DatabaseProjectAccessor;
-import request.Request;
-import request.RequestAllocate;
-import request.RequestChangeTitle;
-import request.RequestDeregister;
+import request.*;
 
 public class Student extends User {
 	private Project p;
 	private Supervisor s;
-	private Supervisor FYPcoor;
+	private FYPcoordinator FYPcoor;
 	private boolean deregistered = false;
 	
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
@@ -27,29 +24,22 @@ public class Student extends User {
 		this.p = p;
 	}
 	
-	public void setFYPcoor(Supervisor FYPcoor) {
-			this.FYPcoor = FYPcoor;
-		
+	public void setFYPcoor(FYPcoordinator FYPcoor) {
+		this.FYPcoor = FYPcoor;
 	}
 	
 	public void viewAllProject() {
-		DatabaseProjectAccessor.viewAllProject();
+		DatabaseProjectAccessor.viewAvailableProject(); //implement later w method chain
 	}
 	
 	
-	public void viewProject() {
-		
-		if (p == null) {
-			System.out.println("You have not selected a project.");
-		}
-		else {
-			System.out.println("Your project title is: " + p);
-		}
+	public void viewProject() {		
+		System.out.println("Your project title is: " + p.getTitle());
 	}
 	
 	public void changeTitle() {
 		System.out.println("Enter new title");
-		String newTitle = sc.next();
+		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
 		r.senderID = this.getUserID();
 		r.receiverID = s.getUserID();
@@ -88,18 +78,5 @@ public class Student extends User {
 		deregistered = true;
 
 	}
-	
-	
-	public void viewAllOutgoingRequests() {
-		for(int i=0; i<outgoingRequest.size(); i++) {
-			Request r = DatabaseRequestAccessor.getRequest(this.outgoingRequest.get(i));
-			System.out.println("SenderID: "+r.senderID);
-			System.out.println("ReceiverID: "+r.receiverID);
-			System.out.println("Type: "+r.type);
-			System.out.println("Approval: "+r.approval);
-			System.out.println("Pending: "+r.pending);
-		}
-	}
-	
 	
 }
