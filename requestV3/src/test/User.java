@@ -6,13 +6,14 @@ import java.util.LinkedList;
 
 public abstract class User {
 	private String userID;
-	private String password;
+	private String password ="password";
 	private String name;
 	private String email;
 	
-	User(String ID) {
+	User(name, email, String ID) {
 		userID = ID;
-		password = "password";
+		this.name = name;
+		this.email = email;
 	}
 	
 	public String getUserID() {
@@ -35,14 +36,6 @@ public abstract class User {
 		Scanner a = new Scanner(System.in);
 		System.out.println("Please enter your new password: ");
 		password = a.nextLine();
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-		
-	public void setEmail(String email) {
-		this.email = email;
 	}	
 	
 	public abstract void viewAllProjects();
