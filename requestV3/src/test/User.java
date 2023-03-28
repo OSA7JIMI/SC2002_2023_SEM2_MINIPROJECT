@@ -2,7 +2,6 @@ package test;
 
 import java.util.Scanner;
 import request.Request;
-import java.util.LinkedList;
 
 public abstract class User {
 	private String userID;
