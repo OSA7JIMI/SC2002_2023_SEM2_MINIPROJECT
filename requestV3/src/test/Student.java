@@ -1,4 +1,4 @@
-package test;
+package sc2002_assignment;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,37 +12,32 @@ public class Student extends User {
 	private Project p;
 	private Supervisor s;
 	private Supervisor FYPcoor;
-	//STORES THE INDEX LOCATION OF THE REQUEST IN THE REQUESTARRAY
+	private boolean deregistered = false;
+	
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
 	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	Scanner sc = new Scanner(System.in);
 	
-	Student(String name, String email, String ID, Supervisor s) {
-		super(ID);
-		this.setName(name);
-		this.setEmail(email);
-		this.s = s;
+	Student(String name, String email, String ID) {
+		super(name, email, ID); 
 	}
 	
-	//NEW
 	public void setProject(Project p) {
 		this.p = p;
 	}
 	
-	//NEW
 	public void setFYPcoor(Supervisor FYPcoor) {
-		this.FYPcoor = FYPcoor;
+			this.FYPcoor = FYPcoor;
+		
 	}
 	
-	//NEW
 	public void viewAllProject() {
 		DatabaseProjectAccessor.viewAllProject();
 	}
 	
 	
 	public void viewProject() {
-//		edit based on project class
 		
 		if (p == null) {
 			System.out.println("You have not selected a project.");
@@ -52,7 +47,6 @@ public class Student extends User {
 		}
 	}
 	
-	//NEW
 	public void changeTitle() {
 		System.out.println("Enter new title");
 		String newTitle = sc.next();
@@ -65,20 +59,24 @@ public class Student extends User {
 		s.addToIncomingRequest(index);
 	}
 	
-	//NEW
 	public void allocate() {
-		System.out.println("Enter projectID to be allocated");
-		int projectID = sc.nextInt();
-		Request r = new RequestAllocate(projectID);
-		r.senderID = this.getUserID();
-		r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
-		int index = DatabaseRequestAccessor.addRequest(r);
-		Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
-		this.incomingRequest.add(index);
-		s.addToIncomingRequest(index);
+		if(!deregistered) {
+			System.out.println("Enter projectID to be allocated");
+			int projectID = sc.nextInt();
+			Request r = new RequestAllocate(projectID);
+			r.senderID = this.getUserID();
+			r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
+			int index = DatabaseRequestAccessor.addRequest(r);
+			Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
+			this.incomingRequest.add(index);
+			s.addToIncomingRequest(index);
+		}
+		else {
+			System.out.println("Since you have previously deregistered a project, you are not allowed to register for another one.");
+		}
+		
 	}
 	
-	//NEW
 	public void deregister() {
 		System.out.println("Deregistering project request sent");
 		Request r = new RequestDeregister();
@@ -87,6 +85,7 @@ public class Student extends User {
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
 		FYPcoor.addToIncomingRequest(index);
+		deregistered = true;
 
 	}
 	
