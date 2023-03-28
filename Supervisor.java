@@ -160,10 +160,25 @@ public class Supervisor extends User{
 					this.createProject();
 				}
 				else if(choice.equals("/settlerequests")) {
-					System.out.println("Enter the request ID you want to settle");
-					int ID = sc.nextInt();
-					this.settleIncomingRequest(ID);
-					//how to use student ID to select request?
+					if(incomingRequest.size() == 0) {
+						System.out.println("There's no incoming request!");
+						
+					}
+					else{
+						System.out.println("Enter the student ID to settle his/her request");
+						String stuID = sc.next();
+						int i, ID = 0;
+						for(i = 0; i < incomingRequest.size();i++) {
+							if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID == stuID) {
+								ID = incomingRequest.get(i);
+								break;
+						    }
+					    }
+						if(ID == 0) {
+							System.out.println("This student didn't make request to you");
+						}
+						else this.settleIncomingRequest(ID);
+					}
 				}
 				//NEW
 				else if(choice.equals("/viewrequesthistory")) {
