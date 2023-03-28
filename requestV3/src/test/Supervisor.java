@@ -8,25 +8,28 @@ import request.*;
 import databaseRequest.DatabaseRequestAccessor;
 
 public class Supervisor extends User{
-	protected ArrayList<Integer> projectArray = new ArrayList<Integer>();
-	protected int numProject;
-	protected int numProjectCreated = 0;
-	protected boolean isFYP = false;
-	protected Supervisor FYPcoor;
-	protected ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
-	protected ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
+	private int numProject = 0;
+	private FYPcoordinator FYPcoor;
+	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
+	private ArrayList<Integer> projectArray = new ArrayList<Integer>();
 	
 	Scanner sc = new Scanner(System.in);
 	
 	Supervisor(String name, String email, String ID) {
-		super(ID);
-		this.setName(name);
-		this.setEmail(email);
+		super(name, email, ID);
 	}
 	
-	//NEW
-	public void setFYP() {
-		isFYP = true;
+	public void incrementNumProject {
+		numProject++;
+	}
+	
+	public ArrayList<Integer> getProjectArray {
+		return projectArray;
+	}
+	
+	public int getNumProject {
+		return numProject;
 	}
 		
 	//NEW
