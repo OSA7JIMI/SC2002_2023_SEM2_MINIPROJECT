@@ -9,8 +9,6 @@ public abstract class User {
 	private String password;
 	private String name;
 	private String email;
-	//private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
-	//private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	
 	User(String ID) {
 		userID = ID;
@@ -48,14 +46,8 @@ public abstract class User {
 	}	
 	
 	public abstract void viewAllProjects();
-	//public abstract void changeTitle() ;
 	public abstract void displayOptions(); 
 	
-	public void updateIncomingRequest(int requestID, boolean approval) {		
-	}
-	
-	public void updateOutgoingRequest(int requestID, boolean approval) {
-	}
 	
 	public void viewAllRequests() {
 		System.out.println("Request History: \n");
