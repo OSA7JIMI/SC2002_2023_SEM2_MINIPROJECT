@@ -20,6 +20,10 @@ public class Supervisor extends User{
 		super(name, email, ID);
 	}
 	
+	public void setFYPcoor(FYP coordinator FYPcoor){
+		this.FYPcoor = FYPcoor;
+	}
+	
 	public void incrementNumProject {
 		numProject++;
 	}
