@@ -7,10 +7,8 @@ public class FYP_App {
 	public static void main(String[] args) {
 		// To-do: create User objects from initialization file
 		// and add them to UserArray
-		boolean end =false;
+		boolean logout = false;
 		
-		while(!end) {
-			boolean logout = false;
 			System.out.println("Welcome to the FYP registration system!");
 			System.out.println("Please enter your user ID to log in: ");
 			Scanner scan = new Scanner(System.in);
@@ -54,6 +52,5 @@ public class FYP_App {
 					end = true;
 				}
 			}
-		}
 	}
 }
