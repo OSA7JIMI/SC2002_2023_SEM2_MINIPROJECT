@@ -200,5 +200,16 @@ public class Supervisor extends User{
 			}
 		}
 	
+	Public void viewPendingRequests(){
+		System.out.println("---Pending requests---");
+		for(int i=0; i<incomingRequest.size(); i++) {
+			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestIndex);
+			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID);
+			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).projectID);
+			System.out.println("Status: Pending");
+			System.out.println("----------");
+		}
+	}
+	
 	
 }
