@@ -23,4 +23,9 @@ public class RequestPrinter {
 			System.out.println("ProjectID : "+r1.projectID);
 		}
 	}
+	
+	public static void printAllPendingRequest(int requestID) {
+		Request r = DatabaseRequestAccessor.getRequest(requestID);
+		if(r.pending==false) printAllRequest(requestID);
+	}
 }
