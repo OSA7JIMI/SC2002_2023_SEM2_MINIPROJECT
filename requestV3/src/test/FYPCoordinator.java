@@ -11,15 +11,15 @@ public class FYPCoordinator extends Supervisor{
 		
 	}
 	public void settleRequests(){
-		if(super.getincomingRequest.size() == 0) {
+		if(super.getincomingRequest().size() == 0) {
 			System.out.println("There's no incoming request!");
 		}
 		System.out.println("Enter the student ID to settle his/her request");
 		String stuID = sc.next();
 		int i, ID = 0;
-		for(i = 0; i < super.getincomingRequest.size();i++) {
-			if(DatabaseRequestAccessor.getRequest(super.getincomingRequest.get(i)).senderID == stuID) {
-				ID = super.getincomingRequest.get(i);
+		for(i = 0; i < super.getincomingRequest().size();i++) {
+			if(DatabaseRequestAccessor.getRequest(super.getincomingRequest().get(i)).senderID == stuID) {
+				ID = super.getincomingRequest().get(i);
 				break;
 		    }
 	    }
