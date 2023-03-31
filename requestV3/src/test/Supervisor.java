@@ -9,7 +9,7 @@ import databaseRequest.DatabaseRequestAccessor;
 
 public class Supervisor extends User{
 	private int numProject = 0;
-	private FYPcoordinator FYPcoor;
+	private FYPcoordinator FYPcoor = null;
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
 	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	private ArrayList<Integer> projectArray = new ArrayList<Integer>();
