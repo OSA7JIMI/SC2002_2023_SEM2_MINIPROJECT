@@ -26,6 +26,6 @@ public class RequestPrinter {
 	
 	public static void printAllPendingRequest(int requestID) {
 		Request r = DatabaseRequestAccessor.getRequest(requestID);
-		if(r.pending==false) printAllRequest(requestID);
+		if(r.pending==true) printAllRequest(requestID);
 	}
 }
