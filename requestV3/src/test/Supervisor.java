@@ -17,7 +17,7 @@ public class Supervisor extends User{
 	
 	Scanner sc = new Scanner(System.in);
 	
-	Supervisor(String name, String email, String ID) {
+	public Supervisor(String name, String email, String ID) {
 		super(name, email, ID);
 	}
 	
