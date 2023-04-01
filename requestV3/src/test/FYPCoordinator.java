@@ -43,8 +43,10 @@ public class FYPCoordinator extends Supervisor{
 		int leave =0;
 		Scanncer sc = new Scanner(System.in);
 		while(!leave) {
-			System.outprintln("Enter /leave to leave FYP coordinator options");
+			System.outprintln("Enter /logoff to logoff");
+			System.outprintln("Enter /changepassword to change your password");
 			System.outprintln("Enter /viewmyrequests to view your requests");
+			System.outprintln("Enter /viewpendingrequests to view your pending requests");
 			System.outprintln("Enter /viewallrequests to view all requests");
 			System.outprintln("Enter /viewmyprojects to view your projects");
 			System.outprintln("Enter /viewallprojects to view all projects");
@@ -52,23 +54,30 @@ public class FYPCoordinator extends Supervisor{
 			System.outprintln("Enter /projectdetails to generate project details of a project");
 			
 			String choice = sc.nextline();
-			if(choice.equals("/leave")) {
+			if(choice.equals("/logoff")) {
 				leave=1;
 			}
+			else if(choice.equals("/changepassword")) {
+				changePassword();
+			}
 			else if(choice.equals("/viewmyrequests")) {
-				viewMyRequests();
+				super.viewAllrequests();
+			}
+			else if(choice.equals("/viewpendingrequests")) {
+				super.viewpendingrequests();
 			}
 			else if(choice.equals("/viewallrequests")) {
-				viewAllRequests();
+				DatabaseRequestAccessor.viewAllRequests();
 			}
 			else if(choice.equals("/viewmyprojects")) {
-				viewMyProjects();
+				super.viewAllProjects();
 			}
 			else if(choice.equals("/viewallprojects")) {
-				viewAllProjects();
+				DatabaseProjectAccessor.viewAllProjects();
 			}
 			else if(choice.equals("settlerequests")) {
 				settleRequests();
+				
 			}
 			else if(choice.equals("/projectdetails")) {
 				System.out.println("Enter project id:");
@@ -82,17 +91,8 @@ public class FYPCoordinator extends Supervisor{
 			}
 		}
 	}
-	public viewMyRequests() {
-		super.viewrequests();
-	}
-	public void viewAllRequests() {
-		DatabaseProjectAccessor.viewAllRequests();
-	}
-	public void viewMyProjects() {
-		super.viewprojects();
-	}
-	public void viewAllProjects() {
-		DatabaseProjectAccessor.viewAllProjects();
+	public void changePassword(){
+		changePassword();
 	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
