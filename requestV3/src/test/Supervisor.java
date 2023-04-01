@@ -70,34 +70,7 @@ public class Supervisor extends User{
 			System.out.println("Project ID: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getID() + "  Title: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getTitle() + "  Status: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getStatus());
 		}
 	}
-	
-	/*public void changeTitle() {
-		int i;
-		System.out.println("You got these projects: ");
-		for(i = 0; i < projectArray.length; i++) {
-			System.out.print("ProjectID: " + projectArray[i].projectID);
-			System.out.print("Project Title: " + projectArray[i].projectTitle);
-			System.out.print("Project Status" + projectArray[i].status);
-			System.out.println("Student: " + projectArray[i].s);
-		}
-		System.out.println("Please enter the project ID you want to change title: ");
-		Scanner sc = new Scanner (System.in);
-		int projectId = sc.nextInt();
-		System.out.println("Please enter the new title: ");
-		String newTitle = sc.nextLine();
-		for(i = 0; i < projectArray.length; i++) {
-			if(projectArray[i].projectID == projectId]) {
-				projectArray[i].projectTitle = newTitle;
-			}
-		}
-		System.out.println("Down! The new projects list is: ");
-		for(i = 0; i < projectArray.length; i++) {
-			System.out.print("ProjectID: " + projectArray[i].projectID);
-			System.out.print("Project Title: " + projectArray[i].projectTitle);
-			System.out.print("Project Status" + projectArray[i].status);
-			System.out.println("Student: " + projectArray[i].s);
-		}
-	}*/
+
 	public void  transfer() {
 		System.out.println("Please enter the projectID you want to transfer to another supervisor: ");
 		int projectID = sc.nextInt();
@@ -109,37 +82,14 @@ public class Supervisor extends User{
 		//will change the line below after userarray is implemented
 		FYPcoor.addToIncomingRequest(index);
 	}
+	
 	public void viewAllRequests() {
 		System.out.println("---Viewing all requests---");
-		
-		System.out.println("---Incoming requests---");
 		for(int i=0; i<incomingRequest.size(); i++) {
-			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestIndex);
-			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID);
-			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).projectID);
-			if(DatabaseRequestAccessor.getRequest(i).approval == true)
-				System.out.println("Status: Approval");
-			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
-				System.out.println("Status: Pending");
-			else
-				System.out.println("Status: Rejected");
-			
-			System.out.println("----------");
+			RequestPrinter.printAllRequest(DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).requestID);
 		}
-		
-		System.out.println("---Outgoing requests---");
 		for(int i=0; i<outgoingRequest.size(); i++) {
-			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).requestIndex);
-			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).senderID);
-			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).projectID);
-			if(DatabaseRequestAccessor.getRequest(i).approval == true)
-				System.out.println("Status: Approval");
-			else if(DatabaseRequestAccessor.getRequest(i).pending == true)
-				System.out.println("Status: Pending");
-			else
-				System.out.println("Status: Rejected");
-			
-			System.out.println("----------");
+			RequestPrinter.printAllRequest(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestID);
 		}
 		
 	}
@@ -203,11 +153,10 @@ public class Supervisor extends User{
 	Public void viewPendingRequests(){
 		System.out.println("---Pending requests---");
 		for(int i=0; i<incomingRequest.size(); i++) {
-			System.out.println("Request ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestIndex);
-			System.out.println("Sender ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID);
-			System.out.println("Project ID: "+ DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).projectID);
-			System.out.println("Status: Pending");
-			System.out.println("----------");
+			RequestPrinter.printAllPendingRequest(DatabaseRequestAccessor.getRequest(outgoingRequest.get(i)).requestID);
+		}
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			RequestPrinter.printAllPendingRequest(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).requestID);
 		}
 	}
 	
