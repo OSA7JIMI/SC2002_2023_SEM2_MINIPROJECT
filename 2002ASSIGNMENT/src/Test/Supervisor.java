@@ -112,15 +112,9 @@ public class Supervisor extends User{
 			System.out.println("/7: logout");
 
 			choice = sc.nextLine();
-			if(choice.equals("/1")) {
-				this.viewAllRequests();
-			}
-			else if(choice.equals("/2")) {
-				this.viewAllProjects();
-			}
-			else if(choice.equals("/3")) {
-				this.createProject();
-			}
+			if(choice.equals("/1")) {this.viewAllRequests();}
+			else if(choice.equals("/2")) {this.viewAllProjects();}
+			else if(choice.equals("/3")) {this.createProject();}
 			else if(choice.equals("/4")) {
 				if(incomingRequest.size() == 0) {
 					System.out.println("There's no incoming request!");
