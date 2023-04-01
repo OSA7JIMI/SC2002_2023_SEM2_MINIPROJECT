@@ -58,7 +58,7 @@ public class FYPCoordinator extends Supervisor{
 				leave=1;
 			}
 			else if(choice.equals("/changepassword")) {
-				changePassword();
+				setPassword();
 			}
 			else if(choice.equals("/viewmyrequests")) {
 				super.viewAllrequests();
@@ -90,9 +90,6 @@ public class FYPCoordinator extends Supervisor{
 				System.out.println("Invalid option chosen. Please try again.");
 			}
 		}
-	}
-	public void changePassword(){
-		setPassword();
 	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
