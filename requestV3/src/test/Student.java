@@ -7,7 +7,7 @@ import request.*;
 
 public class Student extends User {
 	private Project p = null;
-	private Supervisor s;
+	private String supervisorID;
 	private FYPcoordinator FYPcoor;
 	private boolean deregistered = false;
 	
@@ -39,7 +39,7 @@ public class Student extends User {
 	
 	public void viewProject() {		
 		System.out.println("Your project title is: " + p.getTitle());
-		System.out.println("Your supervisor is: " + s.getName());
+		System.out.println("Your supervisor is: " + p.getSupervisor());
 	}
 	
 	public void changeTitle() {
