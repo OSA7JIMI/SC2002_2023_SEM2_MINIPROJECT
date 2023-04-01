@@ -12,6 +12,7 @@ import Request.RequestTransfer;
 
 public class Supervisor extends User{
 	private int numProject = 0;
+	private int settledRequests = 0;
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
 	private ArrayList<Integer> outgoingRequest = new ArrayList<Integer>();
 	private ArrayList<Integer> projectArray = new ArrayList<Integer>();
@@ -40,6 +41,10 @@ public class Supervisor extends User{
 	public int getNumProject() {
 		return numProject;
 	}
+	
+	public int getSettledRequests(){
+		return settledRequests;
+	}
 		
 	//NEW
 	public void addToIncomingRequest(int index) {
@@ -47,20 +52,36 @@ public class Supervisor extends User{
 	}
 	
 	//NEW
-	public void settleIncomingRequest(int index) {
-		Request r = DatabaseRequestAccessor.getRequest(index);
-		System.out.println("Enter 0 to reject, 1 to approve");
-		int choice = sc.nextInt();
-		if(choice==0) {
-			r.settleRequest(false);
-		}else {
-			r.settleRequest(true);
+	public void settleRequests() {
+		if(incomingRequest.size() == 0) {
+			System.out.println("There's no incoming request!");
 		}
-		
+		else {
+			System.out.println("Enter the student ID to settle his/her request");
+			String stuID = sc.next();
+			int i, ID = 0;
+			for(i = 0; i < incomingRequest.size();i++) {
+				if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID == stuID) {
+					ID = incomingRequest.get(i);
+					break;
+			    	}
+			}
+		}
+		if(ID == 0) {
+			System.out.println("This student didn't make request to you");
+		}
+		else {
+			Request r = DatabaseRequestAccessor.getRequest(ID);
+			System.out.println("Enter 0 to reject, 1 to approve");
+			int choice = sc.nextInt();
+			if(choice==0) {r.settleRequest(false);}
+			else {r.settleRequest(true);}
+		}
+		settledRequests++;
 	}
 	
 	//NEW
-	public void createProject() {
+	private void createProject() {
 		System.out.println("Enter project title");
 		String title = sc.next();
 		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this.getUserID());
@@ -76,7 +97,7 @@ public class Supervisor extends User{
 		}
 	}
 
-	public void  transfer() {
+	private void  transfer() {
 		System.out.println("Please enter the projectID you want to transfer to another supervisor: ");
 		int projectID = sc.nextInt();
 		System.out.println("Please enter the replacement supervisorId");
@@ -98,7 +119,7 @@ public class Supervisor extends User{
 		}
 	}
 
-	private void changeTitle() {
+	public void changeTitle() {
 		// TODO implement
 	}
 	
@@ -108,44 +129,25 @@ public class Supervisor extends User{
 		while (!choice.equals("/0)) {
 			System.out.println("/0: Log out");
 			System.out.println("/1: Change password");
-			System.out.println("/2: View all requests");
+			System.out.println("/2: View your request history");
 			System.out.println("/3: View pending requests");
-			System.out.println("/4: View all projects");
+			if(incomingRequest.size() > settledRequests) System.out.print(" NEW!");
+			System.out.println();
+			System.out.println("/4: View your projects");
 			System.out.println("/5: Create a new project");
 			System.out.println("/6: Update project title");
 			System.out.println("/7: Settle requests");
-			System.out.println("/8: View request history");
-			System.out.println("/9: Request project transfer");
+			System.out.println("/8: Request project transfer");
 			
 			choice = sc.nextLine();
 			if(choice.equals("/1")) {setPassword();}
-			else if(choice.equals("/2")) {this.viewAllRequests();}
-			else if(choice.equals("/3")) {this.viewPendingRequests();}
+			else if(choice.equals("/2")) {viewAllRequests();}
+			else if(choice.equals("/3")) {viewPendingRequests();}
 			else if(choice.equals("/4")) {viewAllProjects();}
 			else if(choice.equals("/5")) {createProject();}
 			else if(choice.equals("/6")) {changeTitle();}
-			else if(choice.equals("/7")) {
-				if(incomingRequest.size() == 0) {
-					System.out.println("There's no incoming request!");
-				}
-				else {
-					System.out.println("Enter the student ID to settle his/her request");
-					String stuID = sc.next();
-					int i, ID = 0;
-					for(i = 0; i < incomingRequest.size();i++) {
-						if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID == stuID) {
-							ID = incomingRequest.get(i);
-							break;
-					    }
-				    }
-					if(ID == 0) {
-						System.out.println("This student didn't make request to you");
-					}
-					else this.settleIncomingRequest(ID);
-				}
-			}
-			else if(choice.equals("/8")) {viewAllRequests();}
-			else if(choice.equals("/9")) {transfer();}
+			else if(choice.equals("/7")) {settleRequests();}
+			else if(choice.equals("/8")) {transfer();}
 			else {System.out.println("Invalid option chosen. Please try again.");}
 		}
 		
