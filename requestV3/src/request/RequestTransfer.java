@@ -16,9 +16,15 @@ public class RequestTransfer extends Request{
 		this.pending = false;
 		this.approval = approval;
 		if(approval==true) {
-			Project p = DatabaseProjectAccessor.getProject(projectIDtoTransfer);
+			Project p = DatabaseProjectAccessor.getProject(projectID);
 			p.setSupervisor(replacementID);
 			DatabaseProjectAccessor.updateProjectInDatabase(p);
+			Student s = (Student)databaseUserAccessor.getUser(senderID);
+			s.setSupervisor(this.replacementID);
+			Supervisor original = (Supervisor)databaseUserAccessor.getUser(receiverID);
+			Supervisor replacement = (Supervisor)databaseUserAccessor.getUser(replacementID);
+			original.removeProjectFromArray(projectID);
+			replacement.addProjectToArray(projectID);
 		}
 	}
 }
