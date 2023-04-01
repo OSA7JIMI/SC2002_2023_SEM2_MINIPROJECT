@@ -39,17 +39,12 @@ public class FYP_App {
 			while(!logout) {
 				currentUser.displayOptions();
 				System.out.println("Enter /logout to log out of user account");
-				System.out.println("Enter /end to end program");
 				System.out.println("Press enter to continue");
 				String check = scan.nextLine();
 				if(check.equals("/logout")) {
 					System.out.println("You have successfully logged out");
 					logout = true;
 					currentUser = null;
-				}
-				if(check.equals("/end")) {
-					System.out.println("System closing");
-					end = true;
 				}
 			}
 	}
