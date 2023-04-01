@@ -87,14 +87,30 @@ public class FYPCoordinator extends Supervisor{
 
 		}
 		else if(choice.equals("/8")) {
-			System.out.println("Enter project id:");
-			do {
-				projectid = sc.nextInt();
-			}while(projectid < 1 || projectid > DatabaseProjectAccessor.getsize());
-			this.generateProjectDetails(projectid); // Need to minus 1 or not?
-		}
-		else {
-			System.out.println("Invalid option chosen. Please try again.");
-		}
-	}	
+			int valid=0;
+			do{
+				System.outprintln("Enter /1 to generate based on status");
+				System.outprintln("Enter /2 to generate based on supervisorId");
+				choice = sc.nextLine();
+				if(choice.equals("/1") || choice.equals("/2)){
+					valid=1;
+				}
+			}while(valid!=1);
+			if(choice.equals("/1")){
+				valid=0;
+				do{
+					System.outprintln("Enter status of project:");
+					System.outprintln("Enter /1 for available projects");
+					System.outprintln("Enter /2 for reserved projects");
+					System.outprintln("Enter /3 for taken projects");
+					choice = sc.nextLine();
+					if(choice.equals("/1"){
+						Projectprinter.printBasedOnStatus();
+					   || choice.equals("/2) || choice.equals("/3)){
+						valid=1;
+					}
+				}while(valid!=1);
+				
+				Projectprinter.printBasedOnStatus();
+			}
 }
