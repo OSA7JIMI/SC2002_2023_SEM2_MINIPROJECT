@@ -19,6 +19,8 @@ public class RequestAllocate extends Request{
 			Project p = DatabaseProjectAccessor.getProject(projectID);
 			//Get student from userArray, then use the .setProject()
 			//method to allocate project to student
+			Student s = (Student)databaseUserAccessor.getUser(this.senderID);
+			s.setProject(this.projectID);
 		}
 	}
 }
