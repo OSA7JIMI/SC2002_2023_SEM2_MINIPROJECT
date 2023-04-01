@@ -29,11 +29,17 @@ public class Supervisor extends User{
 		numProject++;
 	}
 	
-	public ArrayList<Integer> getProjectArray {
+	public ArrayList<Integer> getProjectArray() {
 		return projectArray;
 	}
+	public ArrayList<Integer> getincomingRequest() {
+		return incomingRequest;
+	}
+	public ArrayList<Integer> getoutgoingRequest() {
+		return outgoingRequest;
+	}
 	
-	public int getNumProject {
+	public int getNumProject() {
 		return numProject;
 	}
 		
