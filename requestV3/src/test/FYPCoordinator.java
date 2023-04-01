@@ -45,58 +45,6 @@ public class FYPCoordinator extends Supervisor{
 		}
 	}
 	
-	public void displayOptions() {
-		int leave =0;
-		Scanncer sc = new Scanner(System.in);
-		while(!leave) {
-			System.outprintln("Enter /logoff to logoff");
-			System.outprintln("Enter /changepassword to change your password");
-			System.outprintln("Enter /viewmyrequests to view your requests");
-			System.outprintln("Enter /viewpendingrequests to view your pending requests");
-			System.outprintln("Enter /viewallrequests to view all requests");
-			System.outprintln("Enter /viewmyprojects to view your projects");
-			System.outprintln("Enter /viewallprojects to view all projects");
-			System.outprintln("Enter /settlerequests to settle requests");
-			System.outprintln("Enter /projectdetails to generate project details of a project");
-			
-			String choice = sc.nextline();
-			if(choice.equals("/logoff")) {
-				leave=1;
-			}
-			else if(choice.equals("/changepassword")) {
-				setPassword();
-			}
-			else if(choice.equals("/viewmyrequests")) {
-				super.viewAllrequests();
-			}
-			else if(choice.equals("/viewpendingrequests")) {
-				super.viewpendingrequests();
-			}
-			else if(choice.equals("/viewallrequests")) {
-				DatabaseRequestAccessor.viewAllRequests();
-			}
-			else if(choice.equals("/viewmyprojects")) {
-				super.viewAllProjects();
-			}
-			else if(choice.equals("/viewallprojects")) {
-				DatabaseProjectAccessor.viewAllProjects();
-			}
-			else if(choice.equals("settlerequests")) {
-				settleRequests();
-				
-			}
-			else if(choice.equals("/projectdetails")) {
-				System.out.println("Enter project id:");
-				do {
-					projectid = sc.nextInt();
-				}while(projectid < 1 || projectid > DatabaseProjectAccessor.getsize());
-				this.generateProjectDetails(projectid); // Need to minus 1 or not?
-			}
-			else {
-				System.out.println("Invalid option chosen. Please try again.");
-			}
-		}
-	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
 		System.out.println("projectID: " p.getprojectID());
@@ -105,4 +53,48 @@ public class FYPCoordinator extends Supervisor{
 		
 	}
 	
+	public void displayOptions() {
+		System.outprintln("Enter /1 to change your password");
+		System.outprintln("Enter /2 to view your requests");
+		System.outprintln("Enter /3 to view your pending requests");
+		System.outprintln("Enter /4 to view all requests");
+		System.outprintln("Enter /5 to view your projects");
+		System.outprintln("Enter /6 to view all projects");
+		System.outprintln("Enter /7 to settle requests");
+		System.outprintln("Enter /8 to generate project details of a project");
+			
+		String choice = sc.nextLine();
+		if(choice.equals("/1")) {
+			setPassword();
+		}
+		else if(choice.equals("/2")) {
+			super.viewAllRequests();
+		}
+		else if(choice.equals("/3")) {
+			super.viewPendingRequests();
+		}
+		else if(choice.equals("/4")) {
+			DatabaseRequestAccessor.viewAllRequests();
+		}
+		else if(choice.equals("/5")) {
+			super.viewAllProjects();
+		}
+		else if(choice.equals("/6")) {
+			DatabaseProjectAccessor.viewAllProjects();
+		}
+		else if(choice.equals("/7")) {
+			settleRequests();
+
+		}
+		else if(choice.equals("/8")) {
+			System.out.println("Enter project id:");
+			do {
+				projectid = sc.nextInt();
+			}while(projectid < 1 || projectid > DatabaseProjectAccessor.getsize());
+			this.generateProjectDetails(projectid); // Need to minus 1 or not?
+		}
+		else {
+			System.out.println("Invalid option chosen. Please try again.");
+		}
+	}	
 }
