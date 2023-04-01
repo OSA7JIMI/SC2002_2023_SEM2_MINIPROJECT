@@ -105,12 +105,22 @@ public class FYPCoordinator extends Supervisor{
 					System.outprintln("Enter /3 for taken projects");
 					choice = sc.nextLine();
 					if(choice.equals("/1"){
-						Projectprinter.printBasedOnStatus();
-					   || choice.equals("/2) || choice.equals("/3)){
+						Projectprinter.printBasedOnStatus(0);
 						valid=1;
 					}
+					else if(choice.equals("/2"){
+						Projectprinter.printBasedOnStatus(1);
+						valid=1;
+					}
+					else if(choice.equals("/3"){
+						Projectprinter.printBasedOnStatus(2);
+						valid=1;
+					}
+					   
 				}while(valid!=1);
 				
-				Projectprinter.printBasedOnStatus();
+			}
+			else if(choice.equals("/2"){
+				
 			}
 }
