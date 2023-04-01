@@ -97,30 +97,38 @@ public class Supervisor extends User{
 			RequestPrinter.printAllRequest(outgoingRequest.get(i));
 		}
 	}
+
+	private void changeTitle() {
+		// TODO implement
+	}
 	
 	public void displayOptions() {
 		String choice = "dummy";
 		
-		while (!choice.equals("/7)) {
-		
-			System.out.println("/1: view all requests");
-			System.out.println("/2: view all projects");
-			System.out.println("/3: create a new project");
-			System.out.println("/4: settle requests");
-			System.out.println("/5: view request history");
-			System.out.println("/6: request project transfer");
-			System.out.println("/7: logout");
-
+		while (!choice.equals("/0)) {
+			System.out.println("/0: Log out");
+			System.out.println("/1: Change password");
+			System.out.println("/2: View all requests");
+			System.out.println("/3: View pending requests");
+			System.out.println("/4: View all projects");
+			System.out.println("/5: Create a new project");
+			System.out.println("/6: Update project title");
+			System.out.println("/7: Settle requests");
+			System.out.println("/8: View request history");
+			System.out.println("/9: Request project transfer");
+			
 			choice = sc.nextLine();
-			if(choice.equals("/1")) {this.viewAllRequests();}
-			else if(choice.equals("/2")) {this.viewAllProjects();}
-			else if(choice.equals("/3")) {this.createProject();}
-			else if(choice.equals("/4")) {
+			if(choice.equals("/1")) {setPassword();}
+			else if(choice.equals("/2")) {this.viewAllRequests();}
+			else if(choice.equals("/3")) {this.viewPendingRequests();}
+			else if(choice.equals("/4")) {viewAllProjects();}
+			else if(choice.equals("/5")) {createProject();}
+			else if(choice.equals("/6")) {changeTitle();}
+			else if(choice.equals("/7")) {
 				if(incomingRequest.size() == 0) {
 					System.out.println("There's no incoming request!");
-
 				}
-				else{
+				else {
 					System.out.println("Enter the student ID to settle his/her request");
 					String stuID = sc.next();
 					int i, ID = 0;
@@ -136,8 +144,8 @@ public class Supervisor extends User{
 					else this.settleIncomingRequest(ID);
 				}
 			}
-			else if(choice.equals("/5")) {this.viewAllRequests();}
-			else if(choice.equals("/6")) {this.transfer();}
+			else if(choice.equals("/8")) {viewAllRequests();}
+			else if(choice.equals("/9")) {transfer();}
 			else {System.out.println("Invalid option chosen. Please try again.");}
 		}
 		
