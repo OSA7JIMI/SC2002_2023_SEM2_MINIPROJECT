@@ -1,6 +1,12 @@
 package OOP_Group_Project;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import databaseProject.DatabaseProjectAccessor;
+import request.*;
+import databaseRequest.DatabaseRequestAccessor;
+import databaseRequest.RequestPrinter;
 
 public class FYPCoordinator extends Supervisor{
 	
