@@ -92,7 +92,7 @@ public class FYPCoordinator extends Supervisor{
 		}
 	}
 	public void changePassword(){
-		changePassword();
+		setPassword();
 	}
 	public void generateProjectDetails(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
