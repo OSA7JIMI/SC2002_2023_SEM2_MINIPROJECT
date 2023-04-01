@@ -7,7 +7,6 @@ import request.*;
 
 public class Student extends User {
 	private Project p = null;
-	private String supervisorID;
 	private FYPcoordinator FYPcoor;
 	private boolean deregistered = false;
 	
