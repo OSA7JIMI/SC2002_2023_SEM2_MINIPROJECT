@@ -35,25 +35,23 @@ public class Student extends User {
 		this.projectID = projectID;
 	}
 	
-	
-	
 	public void setDeregister() {
 		deregistered = true;
 	}
 	
-	public void viewAllProjects() {
-		ProjectPrinter.printAllAvailable(); //implement later w method chain
+	private void viewAllProjects() {
+		ProjectPrinter.printAllAvailable();
 	}
 	
 	
-	public void viewProject() {		
+	private void viewProject() {		
 		Project p = DatabaseProjectAccessor.getProject(projectID);
 		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(supervisorID);
 		System.out.println("Your project title is: " + p.getTitle());
 		System.out.println("Your supervisor is: " + sp.getName());
 	}
 	
-	public void changeTitle() {
+	private void changeTitle() {
 		System.out.println("Enter new title");
 		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
@@ -66,7 +64,7 @@ public class Student extends User {
 		sp.addToIncomingRequest(index);
 	}
 	
-	public void allocate() {
+	private void allocate() {
 		if(!deregistered) {
 			System.out.println("Enter projectID to be allocated");
 			int projectID = sc.nextInt();
@@ -84,7 +82,7 @@ public class Student extends User {
 		
 	}
 	
-	public void deregister() {
+	private void deregister() {
 		System.out.println("Deregistering project request sent");
 		Request r = new RequestDeregister();
 		r.senderID = this.getUserID();
@@ -95,42 +93,40 @@ public class Student extends User {
 	}
 	
 	public void displayOptions() {
-		System.out.println("Welcome" + super.getName());
-		if (projectID==-1) {
-			System.out.println("/1: View all available projects");
-			System.out.println("/2: Request project allocation");
-			System.out.println("/3: Change your password");
-			String choice = sc.nextLine();
-			if(choice.equals("/1")) {
-				ProjectPrinter.printAllAvailable();
-			}else if(choice.equals("/2")) {
-				allocate();
-			}else if(choice.equals("/3")) {
-				setPassword();
-			}else if(choice.equals("/4")) {
-				System.out.println("Invalid option");
+		String choice = "dummy";
+		
+		while (!choice.equals("/0)) {
+			System.out.println("/0: Log out");
+			System.out.println("/1: Change password");
+			System.out.println("/2: View request history");
+			System.out.println("/3: View pending requests");
+			if (projectID==-1) {
+				System.out.println("/4: View all available projects");
+				System.out.println("/5: Request project allocation");
+				choice = sc.nextLine();
+				if (choice.equals("/1)) {setPassword();}
+				else if(choice.equals("/2")) {viewAllRequests();}
+				else if(choice.equals("/3")) {viewPending Requests();}
+				else {System.out.println("Invalid option");}
+			}
+
+			else {
+				System.out.println("/4: View your project");
+				System.out.println("/5: Request to change your project title");
+				System.out.println("/6: Request project deregistration");
+				choice = sc.nextLine();
+				if (choice.equals("/1)) {setPassword();}
+				else if(choice.equals("/2")) {viewAllRequests();}
+				else if(choice.equals("/3")) {viewPending Requests();}
+				else if(choice.equals("/4")) {viewProject();}
+				else if(choice.equals("/5")) {changeTitle();}
+				else if(choice.equals("/6")) {deregister();}
+				else {System.out.println("Invalid option");}	
 			}
 		}
-			
-		else {
-			System.out.println("/1: View your project");
-			System.out.println("/2: Request to change your project title");
-			System.out.println("/3: Request project deregistration");
-			System.out.println("/4: Change your password");
-			String choice = sc.nextLine();
-			if(choice.equals("/1")) {
-				ProjectPrinter.printAllAvailable();
-			}else if(choice.equals("/2")) {
-				changeTitle();
-			}else if(choice.equals("/3")) {
-				deregister();
-			}else if(choice.equals("/4")) {
-				setPassword();
-			}else {
-				System.out.println("Invalid option");
-			}	
-		}
-}
+				      
+		System.out.println("Logging out...");
+	}
 
 		public void viewPendingRequests(){
 			System.out.println("---Pending requests---");
