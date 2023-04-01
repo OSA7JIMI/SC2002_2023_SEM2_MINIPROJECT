@@ -9,7 +9,7 @@ public abstract class User {
 	private String name;
 	private String email;
 	
-	User(name, email, String ID) {
+	public User(name, email, String ID) {
 		userID = ID;
 		this.name = name;
 		this.email = email;
