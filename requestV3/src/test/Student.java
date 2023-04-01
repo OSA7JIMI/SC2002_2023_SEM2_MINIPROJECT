@@ -84,20 +84,19 @@ public class Student extends User {
 	
 	public void displayOptions() {
 		System.out.println("Welcome" + super.getname());
-		Scanner scan = new Scanner(System.in);
+		String choice = sc.nextLine();
 		if (p== null) {
-			System.out.println("1: View all available projects");
-			System.out.println("2: Request project allocation");
-			System.out.println("3: Change your password");
-			String choice = scan.nextInt();
+			System.out.println("/1: View all available projects");
+			System.out.println("/2: Request project allocation");
+			System.out.println("/3: Change your password");
 			switch (choice) {
-				case 1:
+				case /1:
 					viewAllProject();
 					break;
-				case 2: 
+				case /2: 
 					allocate();
 					break;
-				case 3:
+				case /3:
 					setPassword();
 					break
 				default:
@@ -105,22 +104,21 @@ public class Student extends User {
 		}
 			
 		else {
-			System.out.println("1: View your project");
-			System.out.println("2: Request to change your project title");
-			System.out.println("3: Request project deregistration");
-			System.out.println("4: Change your password");
-			String choice = scan.nextInt();
+			System.out.println("/1: View your project");
+			System.out.println("/2: Request to change your project title");
+			System.out.println("/3: Request project deregistration");
+			System.out.println("/4: Change your password");
 			switch (choice) {
-				case 1:
+				case /1:
 					viewAllProject();
 					break;
-				case 2: 
+				case /2: 
 					changeTitle();
 					break;
-				case 3:
+				case /3:
 					deregister();
 					break;
-				case 4:
+				case /4:
 					setPassword();
 					break					
 				default:
