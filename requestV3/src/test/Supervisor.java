@@ -157,5 +157,11 @@ public class Supervisor extends User{
 		}
 	}
 	
-	
+	Public void removeProjectFromArray(int projectID){
+		projectArray.remove(projectID);
+	}
+
+	Public void addProjectToArray(int projectID){
+		projectArray.add(projectID);	
+	}
 }
