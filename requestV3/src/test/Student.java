@@ -38,14 +38,14 @@ public class Student extends User {
 	
 	public void viewProject() {		
 		System.out.println("Your project title is: " + p.getTitle());
-		System.out.println("Your supervisor is: " + p.getSupervisor());
+		System.out.println("Your supervisor is: " + p.getSupervisor().getName());
 	}
 	
 	public void changeTitle() {
 		System.out.println("Enter new title");
 		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
-		r.senderID = this.getUserID();
+		r.senderID = getUserID();
 		r.receiverID = s.getUserID();
 		int index = DatabaseRequestAccessor.addRequest(r);
 		r.requestIndex = index;
@@ -58,12 +58,11 @@ public class Student extends User {
 			System.out.println("Enter projectID to be allocated");
 			int projectID = sc.nextInt();
 			Request r = new RequestAllocate(projectID);
-			r.senderID = this.getUserID();
-			r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
+			r.senderID = getUserID();
+			r.receiverID = FYP.getUserID();
 			int index = DatabaseRequestAccessor.addRequest(r);
-			Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
+			DatabaseProjectAccessor.getProject(projectID).getSupervisor().addToIncomingRequest(index);
 			this.incomingRequest.add(index);
-			s.addToIncomingRequest(index);
 		}
 		else {
 			System.out.println("Since you have previously deregistered a project, you are not allowed to register for another one.");
@@ -74,7 +73,7 @@ public class Student extends User {
 	public void deregister() {
 		System.out.println("Deregistering project request sent");
 		Request r = new RequestDeregister();
-		r.senderID = this.getUserID();
+		r.senderID = getUserID();
 		r.receiverID = FYPcoor.getUserID();
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
@@ -82,7 +81,7 @@ public class Student extends User {
 	}
 	
 	public void displayOptions() {
-		System.out.println("Welcome" + super.getname());
+		System.out.println("Welcome" + super.getName());
 		String choice = sc.nextLine();
 		if (p== null) {
 			System.out.println("/1: View all available projects");
