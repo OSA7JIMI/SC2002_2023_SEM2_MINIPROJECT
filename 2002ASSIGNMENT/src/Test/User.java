@@ -44,6 +44,7 @@ public abstract class User {
 		Scanner a = new Scanner(System.in);
 		System.out.println("Please enter your new password: ");
 		password = a.nextLine();
+		System.out.println("Password changed succesfully");
 	}	
 	
 	public abstract void viewAllProjects();
