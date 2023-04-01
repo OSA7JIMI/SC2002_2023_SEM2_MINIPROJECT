@@ -6,6 +6,7 @@ import databaseProject.DatabaseProjectAccessor;
 import databaseProject.ProjectArray;
 import request.*;
 import databaseRequest.DatabaseRequestAccessor;
+import databaseRequest.RequestPrinter;
 
 public class Supervisor extends User{
 	private int numProject = 0;
@@ -60,7 +61,7 @@ public class Supervisor extends User{
 		String title = sc.next();
 		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this);
 		DatabaseProjectAccessor.addProject(p);
-		projectArray.add(DatabaseProjectAccessor.getSize()-1);
+		projectArray.add(p);
 		numProjectCreated++;
 		
 	}
