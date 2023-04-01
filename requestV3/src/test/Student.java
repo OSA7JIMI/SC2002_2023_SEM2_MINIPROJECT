@@ -6,7 +6,7 @@ import databaseProject.DatabaseProjectAccessor;
 import request.*;
 
 public class Student extends User {
-	private Project p;
+	private Project p = null;
 	private Supervisor s;
 	private FYPcoordinator FYPcoor;
 	private boolean deregistered = false;
@@ -28,6 +28,10 @@ public class Student extends User {
 		this.FYPcoor = FYPcoor;
 	}
 	
+	public void setDeregister() {
+		deregistered = true;
+	}
+	
 	public void viewAllProject() {
 		DatabaseProjectAccessor.viewAvailableProject(); //implement later w method chain
 	}
@@ -35,6 +39,7 @@ public class Student extends User {
 	
 	public void viewProject() {		
 		System.out.println("Your project title is: " + p.getTitle());
+		System.out.println("Your supervisor is: " + s.getName());
 	}
 	
 	public void changeTitle() {
@@ -75,8 +80,43 @@ public class Student extends User {
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
 		FYPcoor.addToIncomingRequest(index);
-		deregistered = true;
-
 	}
 	
+	public void displayOptions() {
+		System.out.println("Welcome" + super.getname());
+		Scanner scan = new Scanner(System.in);
+		if (p== null) {
+			System.out.println("1: View all available projects");
+			System.out.println("2: Request project allocation");
+			String choice = scan.nextInt();
+			switch (choice) {
+				case 1:
+					viewAllProject();
+					break;
+				case 2: 
+					allocate();
+					break;
+				default:
+					System.out.println("Invalid option");
+		}
+			
+		else {
+			System.out.println("1: View your project");
+			System.out.println("2: Request to change your project title");
+			System.out.println("3: Request project deregistration");
+			String choice = scan.nextInt();
+			switch (choice) {
+				case 1:
+					viewAllProject();
+					break;
+				case 2: 
+					changeTitle();
+					break;
+				case 3:
+					deregister();
+					break;
+				default:
+					System.out.println("Invalid option");
+		}	
+	}
 }
