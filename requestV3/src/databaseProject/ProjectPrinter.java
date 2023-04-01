@@ -19,6 +19,7 @@ public class ProjectPrinter {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Status : "+p.getStatus());
+				System.out.println(" ");
 			}
 		}
 	}
@@ -30,6 +31,7 @@ public class ProjectPrinter {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Status : "+p.getStatus());
+				System.out.println(" ");
 			}
 		}
 	}
@@ -41,6 +43,7 @@ public class ProjectPrinter {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Status : "+p.getStatus());
+				System.out.println(" ");
 			}
 		}
 	}
