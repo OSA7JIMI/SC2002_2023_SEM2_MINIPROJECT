@@ -12,9 +12,7 @@ public class FYPCoordinator extends Supervisor{
 	
 
 	public FYPCoordinator(String name, String email, String ID) {
-		super(name,email,ID);
-		isFYP = true;
-		
+		super(name,email,ID);		
 	}
 	public void settleRequests(){
 		if(super.getincomingRequest().size() == 0) {
