@@ -15,7 +15,7 @@ public class Student extends User {
 	
 	Scanner sc = new Scanner(System.in);
 	
-	Student(String name, String email, String ID) {
+	public Student(String name, String email, String ID) {
 		super(name, email, ID); 
 	}
 	
