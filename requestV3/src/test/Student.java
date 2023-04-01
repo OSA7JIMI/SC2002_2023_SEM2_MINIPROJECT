@@ -88,6 +88,7 @@ public class Student extends User {
 		if (p== null) {
 			System.out.println("1: View all available projects");
 			System.out.println("2: Request project allocation");
+			System.out.println("3: Change your password");
 			String choice = scan.nextInt();
 			switch (choice) {
 				case 1:
@@ -96,6 +97,9 @@ public class Student extends User {
 				case 2: 
 					allocate();
 					break;
+				case 3:
+					setPassword();
+					break
 				default:
 					System.out.println("Invalid option");
 		}
@@ -104,6 +108,7 @@ public class Student extends User {
 			System.out.println("1: View your project");
 			System.out.println("2: Request to change your project title");
 			System.out.println("3: Request project deregistration");
+			System.out.println("4: Change your password");
 			String choice = scan.nextInt();
 			switch (choice) {
 				case 1:
@@ -115,6 +120,9 @@ public class Student extends User {
 				case 3:
 					deregister();
 					break;
+				case 4:
+					setPassword();
+					break					
 				default:
 					System.out.println("Invalid option");
 		}	
