@@ -44,8 +44,10 @@ public class FYPCoordinator extends Supervisor{
 		Scanncer sc = new Scanner(System.in);
 		while(!leave) {
 			System.outprintln("Enter /leave to leave FYP coordinator options");
-			System.outprintln("Enter /viewrequests to view all requests");
-			System.outprintln("Enter /viewprojects to view all projects");
+			System.outprintln("Enter /viewmyrequests to view your requests");
+			System.outprintln("Enter /viewallrequests to view all requests");
+			System.outprintln("Enter /viewmyprojects to view your projects");
+			System.outprintln("Enter /viewallprojects to view all projects");
 			System.outprintln("Enter /settlerequests to settle requests");
 			System.outprintln("Enter /projectdetails to generate project details of a project");
 			
@@ -53,14 +55,20 @@ public class FYPCoordinator extends Supervisor{
 			if(choice.equals("/leave")) {
 				leave=1;
 			}
-			else if(choice.equals("/viewrequests")) {
-				this.viewAllRequests();
+			else if(choice.equals("/viewmyrequests")) {
+				viewMyRequests();
 			}
-			else if(choice.equals("/viewprojects")) {
-				this.viewAllProjects();
+			else if(choice.equals("/viewallrequests")) {
+				viewAllRequests();
+			}
+			else if(choice.equals("/viewmyprojects")) {
+				viewMyProjects();
+			}
+			else if(choice.equals("/viewallprojects")) {
+				viewAllProjects();
 			}
 			else if(choice.equals("settlerequests")) {
-				this.settleRequests();
+				settleRequests();
 			}
 			else if(choice.equals("/projectdetails")) {
 				System.out.println("Enter project id:");
@@ -74,8 +82,14 @@ public class FYPCoordinator extends Supervisor{
 			}
 		}
 	}
+	public viewMyRequests() {
+		super.viewrequests();
+	}
 	public void viewAllRequests() {
 		DatabaseProjectAccessor.viewAllRequests();
+	}
+	public void viewMyProjects() {
+		super.viewprojects();
 	}
 	public void viewAllProjects() {
 		DatabaseProjectAccessor.viewAllProjects();
