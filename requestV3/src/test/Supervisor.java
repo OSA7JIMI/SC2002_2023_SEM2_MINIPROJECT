@@ -60,7 +60,7 @@ public class Supervisor extends User{
 		String title = sc.next();
 		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this);
 		DatabaseProjectAccessor.addProject(p);
-		projectArray.add(p);
+		projectArray.add(DatabaseProjectAccessor.getSize()-1);
 		numProjectCreated++;
 		
 	}
