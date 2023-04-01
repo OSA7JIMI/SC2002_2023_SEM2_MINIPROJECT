@@ -11,5 +11,9 @@ public class RequestDeregister extends Request{
 	public void settleRequest(boolean approval) {
 		this.pending = false;
 		this.approval = approval;
+		if(approval==true) {
+			Student s = (Student)databaseUserAccessor.getUser(senderID);
+			s.setDeregister();
+		}
 	}
 }
