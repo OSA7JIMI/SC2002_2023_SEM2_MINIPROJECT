@@ -28,10 +28,23 @@ public class ProjectPrinter {
 		}
 	}
 	
-	public static void printAllBasedOnSupervsior(int userID) {
+	public static void printAllBasedOnSupervsior(string supervisorID) {
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
-			if(p.getID()==userID) {
+			if(p.getSupervisorID().equals(supervisorID)) {
+				System.out.println("ID : "+p.getID());
+				System.out.println("Title : "+p.getTitle());
+				System.out.println("Student : "+p.getStudentID());
+				System.out.println("Supervisor : "+p.getSupervisorID());
+				System.out.println("Status : "+p.getStatus());
+				System.out.println(" ");
+			}
+		}
+	}
+	public static void printAllBasedOnStudent(string studentID) {
+		for(int i=0; i<ProjectArray.size; i++) {
+			Project p = DatabaseProjectAccessor.getProject(i);
+			if(p.getStudentID().equals(studentID)) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Student : "+p.getStudentID());
@@ -55,7 +68,7 @@ public class ProjectPrinter {
 			}
 		}
 	}
-	public static void printAllBasedOnStatus(string title) {
+	public static void printAllBasedOnTitle(string title) {
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
 			if(p.getTitle().equals(title)) {
@@ -65,7 +78,6 @@ public class ProjectPrinter {
 				System.out.println("Supervisor : "+p.getSupervisorID());
 				System.out.println("Status : "+p.getStatus());
 				System.out.println(" ");
-				break;
 			}
 		}
 	}
