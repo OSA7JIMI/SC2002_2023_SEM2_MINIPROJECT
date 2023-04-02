@@ -3,7 +3,7 @@ package databaseProject;
 import Test.Project;
 
 public class ProjectPrinter {
-	public static void printALlProject(int projectID) {
+	public static void printAllProject(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
 		System.out.println("-----------------");
 		System.out.println("ID : "+p.getID());
