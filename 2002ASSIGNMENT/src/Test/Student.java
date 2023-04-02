@@ -98,7 +98,7 @@ public class Student extends User {
 	public void displayOptions() {
 		String choice = "dummy";
 		
-		while (!choice.equals("/0)) {
+		while (!choice.equals("/0")) {
 			System.out.println("/0: Log out");
 			System.out.println("/1: Change password");
 			System.out.println("/2: View request history");
@@ -110,6 +110,8 @@ public class Student extends User {
 				if (choice.equals("/1)) {setPassword();}
 				else if(choice.equals("/2")) {viewAllRequests();}
 				else if(choice.equals("/3")) {viewPending Requests();}
+				else if(choice.equals("/4")) {viewAllProjects();}
+				else if(choice.equals("/5")) {allocate();}
 				else {System.out.println("Invalid option");}
 			}
 
