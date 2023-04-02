@@ -134,5 +134,6 @@ public class FYPCoordinator extends Supervisor{
 			else if(choice.equals("/8")) {generateProjectDetails();}
 				
 		}
+		System.out.println("Logging out...");
 	}
 }
