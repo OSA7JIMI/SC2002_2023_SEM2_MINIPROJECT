@@ -38,6 +38,10 @@ public class Project {
 		return this.studentID;
 	}
 	//NEW
+	public void setStudent(String studentID) {
+		this.studentID = studentID;
+	}
+	//NEW
 	public void setTitle(String newTitle) {
 		this.projectTitle = newTitle;
 	}
