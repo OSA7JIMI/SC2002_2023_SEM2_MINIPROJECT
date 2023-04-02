@@ -32,4 +32,8 @@ public class RequestPrinter {
 		Request r = DatabaseRequestAccessor.getRequest(requestID);
 		if(r.pending==true) printAllRequest(requestID);
 	}
+	public static void alertMessage(){ //added this
+		System.out.println("The replacement supervisor already supervises 2 projects.");
+		System.out.println("Enter 0 to reject, 1 to approve again");
+	}
 }
