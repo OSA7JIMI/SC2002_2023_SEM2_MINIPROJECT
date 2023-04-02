@@ -23,7 +23,7 @@ public class FYPCoordinator extends Supervisor{
 				System.out.println("Enter /1 to generate based on status");
 				System.out.println("Enter /2 to generate based on student id");
 				System.out.println("Enter /3 to generate based on supervisor id");
-				System.out.println("Enter /3 to generate based on title");
+				System.out.println("Enter /4 to generate based on project id");
 				choice = sc.nextLine();
 				if(choice.equals("/1") || choice.equals("/2")){
 					valid=1;
@@ -54,7 +54,46 @@ public class FYPCoordinator extends Supervisor{
 
 			}
 			else if(choice.equals("/2")){
-				// TODO not implemented yet
+				valid = 0;
+				do{
+					System.out.println("Enter student id");
+					int studentid = sc.nextLine();
+					if(getUser(studentid)!=NULL){
+						ProjectPrinter.printAllBasedOnStudent(studentid);
+						valid=1;
+					}
+					if(valid==0){
+						System.out.println("student id entered was invalid. Please try again.");
+					}
+				}while(valid!=1);
+			}
+			else if(choice.equals("/3")){
+				valid = 0;
+				do{
+					System.out.println("Enter supervisor id");
+					string supervisorid = sc.nextLine();
+					if(getUser(supervisorid)!=NULL){
+						ProjectPrinter.printAllBasedOnSupervisor(supervisorid);
+						valid=1;
+					}
+					if(valid==0){
+						System.out.println("supervisor id entered was invalid. Please try again.");
+					}
+				}while(valid!=1);
+			}
+			else if(choice.equals("/4")){
+				valid = 0;
+				do{
+					System.out.println("Enter project id");
+					int projectID = sc.nextInt();
+					if(projectID>=0 && projectID<=DatabaseProjectAccessor.getsize()){
+						ProjectPrinter.printAllProject(projectID);
+						valid=1;
+					}
+					if(valid==0){
+						System.out.println("project id entered was invalid. Please try again.");
+					}
+				}while(valid!=1);
 			}
 	}
 	
