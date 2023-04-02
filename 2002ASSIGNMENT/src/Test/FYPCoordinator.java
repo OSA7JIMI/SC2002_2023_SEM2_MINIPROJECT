@@ -101,7 +101,7 @@ public class FYPCoordinator extends Supervisor{
 	public void displayOptions() {
 		String choice = "dummy";
 		
-		while (!choice.equals("/0)) {
+		while (!choice.equals("/0")) {
 			System.out.println("/0: Log out");
 			System.out.println("/1: Change password");
 			System.out.println("/2: View your request history");
