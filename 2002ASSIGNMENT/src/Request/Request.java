@@ -16,6 +16,7 @@ public class Request {
 	//contains the index position in the sender's outgoing request array
 	public String Title;
 	public int projectID = -1;
+	public String replacementID;
 	
 	public void settleRequest(boolean approval) {
 		return;
