@@ -8,7 +8,8 @@ public class ProjectPrinter {
 		System.out.println("-----------------");
 		System.out.println("ID : "+p.getID());
 		System.out.println("Title : "+p.getTitle());
-		System.out.println("Supervisor : "+p.getSupervisor());
+		System.out.println("Student : "+p.getStudentID());
+		System.out.println("Supervisor : "+p.getSupervisorID());
 		System.out.println("Status : "+p.getStatus());
 		System.out.println(" ");
 	}
@@ -19,6 +20,8 @@ public class ProjectPrinter {
 			if(p.getStatus()==0) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
+				System.out.println("Student : "+p.getStudentID());
+				System.out.println("Supervisor : "+p.getSupervisorID());
 				System.out.println("Status : "+p.getStatus());
 				System.out.println(" ");
 			}
@@ -31,7 +34,8 @@ public class ProjectPrinter {
 			if(p.getID()==userID) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
-				System.out.println("Supervisor : "+p.getSupervisor());
+				System.out.println("Student : "+p.getStudentID());
+				System.out.println("Supervisor : "+p.getSupervisorID());
 				System.out.println("Status : "+p.getStatus());
 				System.out.println(" ");
 			}
@@ -44,7 +48,8 @@ public class ProjectPrinter {
 			if(p.getStatus()==status) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
-				System.out.println("Supervisor : "+p.getSupervisor());
+				System.out.println("Student : "+p.getStudentID());
+				System.out.println("Supervisor : "+p.getSupervisorID());
 				System.out.println("Status : "+p.getStatus());
 				System.out.println(" ");
 			}
@@ -53,10 +58,11 @@ public class ProjectPrinter {
 	public static void printAllBasedOnStatus(string title) {
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
-			if(p.gettitle().equals(title)) {
+			if(p.getTitle().equals(title)) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
-				System.out.println("Supervisor : "+p.getSupervisor());
+				System.out.println("Student : "+p.getStudentID());
+				System.out.println("Supervisor : "+p.getSupervisorID());
 				System.out.println("Status : "+p.getStatus());
 				System.out.println(" ");
 				break;
