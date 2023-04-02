@@ -31,7 +31,7 @@ public class ProjectReader {
 	public void read_csv_to_records(String file_path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(file_path))) {
 		    String line;
-		    br.readLine();
+		    //br.readLine();
 		    while ((line = br.readLine()) != null) {
 		        String[] values = line.split(COMMA_DELIMITER);
 		        if(values.length!=0) {		
