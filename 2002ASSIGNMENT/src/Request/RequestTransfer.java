@@ -8,7 +8,6 @@ import databaseProject.DatabaseProjectAccessor;
 import databaseUser.databaseUserAccessor;
 
 public class RequestTransfer extends Request{
-	public String replacementID;
 	public RequestTransfer(int projectID, String supervisorID) {
 		this.pending = true;
 		this.type = 3;
