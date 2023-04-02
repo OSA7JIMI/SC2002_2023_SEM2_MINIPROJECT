@@ -68,17 +68,4 @@ public class ProjectPrinter {
 			}
 		}
 	}
-	public static void printAllBasedOnTitle(string title) {
-		for(int i=0; i<ProjectArray.size; i++) {
-			Project p = DatabaseProjectAccessor.getProject(i);
-			if(p.getTitle().equals(title)) {
-				System.out.println("ID : "+p.getID());
-				System.out.println("Title : "+p.getTitle());
-				System.out.println("Student : "+p.getStudentID());
-				System.out.println("Supervisor : "+p.getSupervisorID());
-				System.out.println("Status : "+p.getStatus());
-				System.out.println(" ");
-			}
-		}
-	}
 }
