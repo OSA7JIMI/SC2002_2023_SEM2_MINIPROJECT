@@ -58,7 +58,7 @@ public class FYPCoordinator extends Supervisor{
 				do{
 					System.out.println("Enter student id");
 					int studentid = sc.nextLine();
-					if(getUser(studentid)!=NULL){
+					if(getUser(studentid)!=null){
 						ProjectPrinter.printAllBasedOnStudent(studentid);
 						valid=1;
 					}
@@ -72,7 +72,7 @@ public class FYPCoordinator extends Supervisor{
 				do{
 					System.out.println("Enter supervisor id");
 					string supervisorid = sc.nextLine();
-					if(getUser(supervisorid)!=NULL){
+					if(getUser(supervisorid)!=null){
 						ProjectPrinter.printAllBasedOnSupervisor(supervisorid);
 						valid=1;
 					}
