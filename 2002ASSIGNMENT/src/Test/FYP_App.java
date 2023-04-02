@@ -8,8 +8,11 @@ import databaseUser.databaseUserAccessor;
 public class FYP_App {
 
 	public static void main(String[] args) {
-		boolean end = false;
+		System.out.println("-----DEBUG-----");
 		UserArray.main(args);
+		ProjectReader.main(args);
+		System.out.println("-----DEBUG-----");
+		System.out.println();
 			
 		while(!end){
 			System.out.println("Welcome to the FYP registration system!");
