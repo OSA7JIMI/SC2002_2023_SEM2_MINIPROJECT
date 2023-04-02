@@ -21,7 +21,9 @@ public class FYPCoordinator extends Supervisor{
 		int valid=0;
 			do{
 				System.out.println("Enter /1 to generate based on status");
-				System.out.println("Enter /2 to generate based on supervisor id");
+				System.out.println("Enter /2 to generate based on student id");
+				System.out.println("Enter /3 to generate based on supervisor id");
+				System.out.println("Enter /3 to generate based on title");
 				choice = sc.nextLine();
 				if(choice.equals("/1") || choice.equals("/2")){
 					valid=1;
