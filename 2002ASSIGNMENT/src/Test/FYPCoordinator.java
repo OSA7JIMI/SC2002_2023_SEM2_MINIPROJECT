@@ -20,10 +20,10 @@ public class FYPCoordinator extends Supervisor{
 	private generateProjectDetails() {
 		int valid=0;
 			do{
-				System.out.println("Enter /1 to generate based on status");
-				System.out.println("Enter /2 to generate based on student id");
-				System.out.println("Enter /3 to generate based on supervisor id");
-				System.out.println("Enter /4 to generate based on project id");
+				System.out.println("/1: generate based on status");
+				System.out.println("/2: generate based on student id");
+				System.out.println("/3: generate based on supervisor id");
+				System.out.println("/4: generate based on project id");
 				choice = sc.nextLine();
 				if(choice.equals("/1") || choice.equals("/2")){
 					valid=1;
@@ -33,9 +33,9 @@ public class FYPCoordinator extends Supervisor{
 				valid=0;
 				do{
 					System.out.println("Enter status of project:");
-					System.out.println("Enter /1 for available projects");
-					System.out.println("Enter /2 for reserved projects");
-					System.out.println("Enter /3 for taken projects");
+					System.out.println("/1: available projects");
+					System.out.println("/2: reserved projects");
+					System.out.println("/3: taken projects");
 					choice = sc.nextLine();
 					if(choice.equals("/1")){
 						ProjectPrinter.printAllBasedOnStatus(0);
