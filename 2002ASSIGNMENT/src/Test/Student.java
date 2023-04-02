@@ -64,15 +64,18 @@ public class Student extends User {
 		sp.addToIncomingRequest(index);
 	}
 	
-	private void allocate() {
+	public void allocate() {
 		if(!deregistered) {
 			System.out.println("Enter projectID to be allocated");
 			int projectID = sc.nextInt();
 			Request r = new RequestAllocate(projectID);
 			r.senderID = this.getUserID();
-			r.receiverID = DatabaseProjectAccessor.getProject(projectID).getSupervisor().getUserID();
+			//CHANGES
+			String supervisorID = DatabaseProjectAccessor.getProject(projectID).getSupervisorID();
+			Supervisor s = (Supervisor) databaseUserAccessor.getUser(supervisorID);
+			
+			r.receiverID = supervisorID;
 			int index = DatabaseRequestAccessor.addRequest(r);
-			Supervisor s = DatabaseProjectAccessor.getProject(projectID).getSupervisor();
 			this.incomingRequest.add(index);
 			s.addToIncomingRequest(index);
 		}
