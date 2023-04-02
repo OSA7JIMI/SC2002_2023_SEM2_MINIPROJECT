@@ -131,28 +131,28 @@ public class Student extends User {
 		System.out.println("Logging out...");
 	}
 
-		public void viewPendingRequests(){
-			System.out.println("---Pending requests---");
-			for(int i=0; i<incomingRequest.size(); i++) {
-				RequestPrinter.printAllPendingRequest(incomingRequest.get(i));
-			}
-			for(int i=0; i<outgoingRequest.size(); i++) {
-				RequestPrinter.printAllPendingRequest(outgoingRequest.get(i));
-			}
+	public void viewPendingRequests(){
+		System.out.println("---Pending requests---");
+		for(int i=0; i<incomingRequest.size(); i++) {
+			RequestPrinter.printAllPendingRequest(incomingRequest.get(i));
 		}
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			RequestPrinter.printAllPendingRequest(outgoingRequest.get(i));
+		}
+	}
 
-		public void viewAllRequests() {
-			System.out.println("---All requests---");
-			for(int i=0; i<incomingRequest.size(); i++) {
-				RequestPrinter.printAllRequest(incomingRequest.get(i));
-			}
-			for(int i=0; i<outgoingRequest.size(); i++) {
-				RequestPrinter.printAllRequest(outgoingRequest.get(i));
-			}
+	public void viewAllRequests() {
+		System.out.println("---All requests---");
+		for(int i=0; i<incomingRequest.size(); i++) {
+			RequestPrinter.printAllRequest(incomingRequest.get(i));
+		}
+		for(int i=0; i<outgoingRequest.size(); i++) {
+			RequestPrinter.printAllRequest(outgoingRequest.get(i));
+		}
 		
-		}
+	}
 						  
-		public void addToIncomingRequest(int index) {
-			incomingRequest.add(index);
-		}
+	public void addToIncomingRequest(int index) {
+		incomingRequest.add(index);
+	}
 }
