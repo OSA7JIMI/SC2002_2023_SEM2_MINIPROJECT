@@ -5,8 +5,8 @@ public class Project {
 	private int status;
 	private int projectID;
 	private String projectTitle;
-	private String studentID;
-	private String supervisorID;
+	private String studentID = null;
+	private String supervisorID = null;
 
 	public Project(int projectID,String projectTitle, int status, String supervisorID) {
 		this.projectID = projectID;
@@ -30,8 +30,12 @@ public class Project {
 		this.status = status;
 	}
 	//NEW
-	public Supervisor getSupervisor() {
-		return this.getSupervisor();
+	public String getSupervisorID() {
+		return this.supervisorID;
+	}
+	//NEW
+	public String getStudentID() {
+		return this.studentID;
 	}
 	//NEW
 	public void setTitle(String newTitle) {
