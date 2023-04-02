@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import Test.Project;
+import Test.Supervisor;
+import databaseUser.databaseUserAccessor;
 
 public class ProjectReader {
 
@@ -16,7 +18,6 @@ public class ProjectReader {
 		database.init_database();
 		
 		//DEBUG
-		System.out.println("Project reading complete");
 		System.out.println("project array size is "+DatabaseProjectAccessor.getSize());
 		//DEBUG
 		
@@ -47,6 +48,8 @@ public class ProjectReader {
 		        	p.setStudent(studentID);
 		        	DatabaseProjectAccessor.addProject(p);
 		  
+		        	Supervisor s = (Supervisor) databaseUserAccessor.getUser(supervisorID);
+		        	s.addProjectToArray(ID);
 		        }
 		    }
 		} catch (FileNotFoundException e) {
