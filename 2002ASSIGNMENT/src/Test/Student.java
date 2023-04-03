@@ -96,41 +96,35 @@ public class Student extends User {
 	}
 	
 	public void displayOptions() {
-		String choice = "dummy";
 		
-		while (!choice.equals("/0")) {
-			System.out.println("/0: Log out");
-			System.out.println("/1: Change password");
-			System.out.println("/2: View request history");
-			System.out.println("/3: View pending requests");
-			if (projectID==-1) {
-				System.out.println("/4: View all available projects");
-				System.out.println("/5: Request project allocation");
-				choice = sc.nextLine();
-				if (choice.equals("/1)) {setPassword();}
-				else if(choice.equals("/2")) {viewAllRequests();}
-				else if(choice.equals("/3")) {viewPending Requests();}
-				else if(choice.equals("/4")) {viewAllProjects();}
-				else if(choice.equals("/5")) {allocate();}
-				else {System.out.println("Invalid option");}
-			}
-
-			else {
-				System.out.println("/4: View your project");
-				System.out.println("/5: Request to change your project title");
-				System.out.println("/6: Request project deregistration");
-				choice = sc.nextLine();
-				if (choice.equals("/1)) {setPassword();}
-				else if(choice.equals("/2")) {viewAllRequests();}
-				else if(choice.equals("/3")) {viewPending Requests();}
-				else if(choice.equals("/4")) {viewProject();}
-				else if(choice.equals("/5")) {changeTitle();}
-				else if(choice.equals("/6")) {deregister();}
-				else {System.out.println("Invalid option");}	
-			}
+		System.out.println("/2: View request history");
+		System.out.println("/3: View pending requests");
+		if (projectID==-1) {
+			System.out.println("/4: View all available projects");
+			System.out.println("/5: Request project allocation");
+			choice = sc.nextLine();
+			if (choice.equals("/1)) {setPassword();}
+			else if(choice.equals("/2")) {viewAllRequests();}
+			else if(choice.equals("/3")) {viewPending Requests();}
+			else if(choice.equals("/4")) {viewAllProjects();}
+			else if(choice.equals("/5")) {allocate();}
+			else {System.out.println("Invalid option");}
 		}
-				      
-		System.out.println("Logging out...");
+
+		else {
+			System.out.println("/4: View your project");
+			System.out.println("/5: Request to change your project title");
+			System.out.println("/6: Request project deregistration");
+			choice = sc.nextLine();
+			if (choice.equals("/1)) {setPassword();}
+			else if(choice.equals("/2")) {viewAllRequests();}
+			else if(choice.equals("/3")) {viewPending Requests();}
+			else if(choice.equals("/4")) {viewProject();}
+			else if(choice.equals("/5")) {changeTitle();}
+			else if(choice.equals("/6")) {deregister();}
+			else {System.out.println("Invalid option");}	
+		}
+		
 	}
 
 	public void viewPendingRequests(){
