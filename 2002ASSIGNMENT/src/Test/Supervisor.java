@@ -173,6 +173,8 @@ public class Supervisor extends User{
 	public void addProjectToArray(int projectID){
 		projectArray.add(projectID);	
 	}
-	
+	public void addToOutgoingRequest(int index) {
+		outgoingRequest.add(index);
+	}
 	
 }
