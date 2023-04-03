@@ -96,7 +96,9 @@ public class Student extends User {
 	}
 	
 	public void displayOptions() {
+		String choice = "dummy";
 		
+		System.out.println("/1: Change password");
 		System.out.println("/2: View request history");
 		System.out.println("/3: View pending requests");
 		if (projectID==-1) {
