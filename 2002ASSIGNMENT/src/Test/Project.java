@@ -22,6 +22,10 @@ public class Project {
 		return this.projectTitle;
 	}
 	//NEW
+	public void setTitle(String newTitle) {
+		this.projectTitle = newTitle;
+	}
+	//NEW
 	public int getStatus() {
 		return this.status;
 	}
@@ -34,6 +38,10 @@ public class Project {
 		return this.supervisorID;
 	}
 	//NEW
+	public void setSupervisor(String supervisorID) {
+		this.supervisorID = supervisorID;
+	}
+	//NEW
 	public String getStudentID() {
 		return this.studentID;
 	}
@@ -41,12 +49,5 @@ public class Project {
 	public void setStudent(String studentID) {
 		this.studentID = studentID;
 	}
-	//NEW
-	public void setTitle(String newTitle) {
-		this.projectTitle = newTitle;
-	}
-	//NEW
-	public void setSupervisor(String supervisorID) {
-		this.supervisorID = supervisorID;
-	}
+	
 }
