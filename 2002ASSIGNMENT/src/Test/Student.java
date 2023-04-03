@@ -157,4 +157,8 @@ public class Student extends User {
 	public void addToIncomingRequest(int index) {
 		incomingRequest.add(index);
 	}
+	public void addToOutgoingRequest(int index) {
+		outgoingRequest.add(index);
+	}
+						  
 }
