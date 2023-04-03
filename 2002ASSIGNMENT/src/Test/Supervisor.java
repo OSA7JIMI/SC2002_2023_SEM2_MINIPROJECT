@@ -126,32 +126,27 @@ public class Supervisor extends User{
 	public void displayOptions() {
 		String choice = "dummy";
 		
-		while (!choice.equals("/0")) {
-			System.out.println("/0: Log out");
-			System.out.println("/1: Change password");
-			System.out.println("/2: View your request history");
-			System.out.println("/3: View pending requests");
-			if(incomingRequest.size() > settledRequests) System.out.print(" NEW!");
-			System.out.println();
-			System.out.println("/4: View your projects");
-			System.out.println("/5: Create a new project");
-			System.out.println("/6: Update project title");
-			System.out.println("/7: Settle requests");
-			System.out.println("/8: Request project transfer");
-			
-			choice = sc.nextLine();
-			if(choice.equals("/1")) {setPassword();}
-			else if(choice.equals("/2")) {viewAllRequests();}
-			else if(choice.equals("/3")) {viewPendingRequests();}
-			else if(choice.equals("/4")) {viewAllProjects();}
-			else if(choice.equals("/5")) {createProject();}
-			else if(choice.equals("/6")) {changeTitle();}
-			else if(choice.equals("/7")) {settleRequests();}
-			else if(choice.equals("/8")) {transfer();}
-			else {System.out.println("Invalid option chosen. Please try again.");}
-		}
-		
-		System.out.println("Logging out...");
+		System.out.println("/1: Change password");
+		System.out.println("/2: View your request history");
+		System.out.println("/3: View pending requests");
+		if(incomingRequest.size() > settledRequests) System.out.print(": NEW!");
+		System.out.println();
+		System.out.println("/4: View your projects");
+		System.out.println("/5: Create a new project");
+		System.out.println("/6: Update project title");
+		System.out.println("/7: Settle requests");
+		System.out.println("/8: Request project transfer");
+
+		choice = sc.nextLine();
+		if(choice.equals("/1")) {setPassword();}
+		else if(choice.equals("/2")) {viewAllRequests();}
+		else if(choice.equals("/3")) {viewPendingRequests();}
+		else if(choice.equals("/4")) {viewAllProjects();}
+		else if(choice.equals("/5")) {createProject();}
+		else if(choice.equals("/6")) {changeTitle();}
+		else if(choice.equals("/7")) {settleRequests();}
+		else if(choice.equals("/8")) {transfer();}
+		else {System.out.println("Invalid option chosen. Please try again.");}
 	}
 
 				
