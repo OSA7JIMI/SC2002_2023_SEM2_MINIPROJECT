@@ -16,6 +16,9 @@ public class FYP_App {
 		
 		System.out.println("-----DEBUG-----");
 		System.out.println();
+		
+		boolean end = false;
+		boolean logout = false;
 			
 		while(!end){
 			System.out.println("Welcome to the FYP registration system!");
@@ -23,7 +26,7 @@ public class FYP_App {
 			Scanner scan = new Scanner(System.in);
 			String ID = scan.nextLine();
 			User currentUser = databaseUserAccessor.getUser(ID); // fill in the method chain search function
-			// exception handling if search function fails
+			// TODO exception handling if search function fails
 
 			System.out.println("Please enter your password: ");
 			String password = scan.nextLine();
@@ -35,9 +38,19 @@ public class FYP_App {
 
 			System.out.println("Welcome, currentUser.getName(), you have successfully logged in");
 
-			currentUser.displayOptions();
+			while(!logout){
+				currentUser.displayOptions();
+				System.out.println(); //for visibility
+				System.out.println("Press enter: Continue");
+				System.out.println("/logout: Log out");
+				String check = scan.nextLine();
+				if(check.equals("/logout")) {logout = true;}
+			}
+			System.out.println("Logging out...");	
+						   
 			System.out.println(); //for visibility
-			System.out.println("Press enter to continue, type /end to end");
+			System.out.println("Press enter: Continue") ;
+			System.out.println("/end: End program");
 			String check = scan.nextLine();
 			if(check.equals("/end")) {end = true;}
 		}
