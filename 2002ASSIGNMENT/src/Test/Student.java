@@ -105,9 +105,9 @@ public class Student extends User {
 			System.out.println("/4: View all available projects");
 			System.out.println("/5: Request project allocation");
 			choice = sc.nextLine();
-			if (choice.equals("/1)) {setPassword();}
+			if (choice.equals("/1")) {setPassword();}
 			else if(choice.equals("/2")) {viewAllRequests();}
-			else if(choice.equals("/3")) {viewPending Requests();}
+			else if(choice.equals("/3")) {viewPendingRequests();}
 			else if(choice.equals("/4")) {viewAllProjects();}
 			else if(choice.equals("/5")) {allocate();}
 			else {System.out.println("Invalid option");}
@@ -118,9 +118,9 @@ public class Student extends User {
 			System.out.println("/5: Request to change your project title");
 			System.out.println("/6: Request project deregistration");
 			choice = sc.nextLine();
-			if (choice.equals("/1)) {setPassword();}
+			if (choice.equals("/1")) {setPassword();}
 			else if(choice.equals("/2")) {viewAllRequests();}
-			else if(choice.equals("/3")) {viewPending Requests();}
+			else if(choice.equals("/3")) {viewPendingRequests();}
 			else if(choice.equals("/4")) {viewProject();}
 			else if(choice.equals("/5")) {changeTitle();}
 			else if(choice.equals("/6")) {deregister();}
