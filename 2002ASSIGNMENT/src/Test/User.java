@@ -53,4 +53,5 @@ public abstract class User {
 	public abstract void viewPendingRequests();
 	public abstract void viewAllRequests();
 	public abstract void addToIncomingRequest(int index);
+	public abstract void addToOutgoingRequest(int index);
 }
