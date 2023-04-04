@@ -6,6 +6,7 @@ import Test.Student;
 import Test.Supervisor;
 import databaseProject.DatabaseProjectAccessor;
 import databaseUser.databaseUserAccessor;
+import databaseRequest.RequestPrinter;
 
 public class RequestTransfer extends Request{
 	public RequestTransfer(int projectID, String supervisorID) {
