@@ -42,7 +42,7 @@ public class RequestWriter {
 			
 		} finally {
 			
-			System.out.println("end");
+			System.out.println("requests updated");
 		}
 	}
 
