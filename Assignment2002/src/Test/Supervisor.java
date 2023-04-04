@@ -134,7 +134,14 @@ public class Supervisor extends User{
 	}
 
 	public void changeTitle() {
-		// TODO implement
+		System.out.println("Enter the project id: ");
+		Scanner scan = new Scanner(System.in);
+		int id = scan.nextInt();
+		Project p = getProject(id);
+		System.out.println("Enter the new title: ");
+		Scanner sc = new Scanner(System.in);
+		String newTitle = sc.nextLine();
+		p.setTitle(newTitle);
 	}
 	
 	public void displayOptions() {
