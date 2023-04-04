@@ -5,6 +5,9 @@ import java.util.Scanner;
 import databaseUser.UserArray;
 import databaseUser.databaseUserAccessor;
 
+import databaseProject.ProjectReader;
+import databaseRequest.RequestReader;
+
 public class FYP_App {
 
 	public static void main(String[] args) {
