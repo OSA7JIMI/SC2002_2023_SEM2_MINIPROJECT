@@ -33,7 +33,7 @@ public class ProjectWriter {
 			
 		} finally {
 			
-			System.out.println("end");
+			System.out.println("projects updated");
 		}
 	}
 
