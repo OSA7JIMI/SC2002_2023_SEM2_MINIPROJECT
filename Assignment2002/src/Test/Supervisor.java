@@ -142,6 +142,7 @@ public class Supervisor extends User{
 		Scanner sc = new Scanner(System.in);
 		String newTitle = sc.nextLine();
 		p.setTitle(newTitle);
+		DatabaseProjectAccessor.updateProjectInDatabase(p);
 	}
 	
 	public void displayOptions() {
