@@ -106,47 +106,45 @@ public class FYPCoordinator extends Supervisor{
 	    String choice = "dummy";
 	    while (!choice.equals("/0")) {
 	      System.out.println("/0: Log out");
-	    System.out.println("/1: Change password");
-	    System.out.println("/2: View your request history");
-	    System.out.print("/3: View pending requests");
-	    if(super.getincomingRequest().size() > super.getSettledRequests()) System.out.print(" NEW!");
-	    System.out.println();
-	    System.out.println("/4: View your projects");
-	    System.out.println("/5: Create a new project");
-	    System.out.println("/6: Update project title");
-	    System.out.println("/7: Settle requests");
-	    System.out.println("/8: Request project transfer");
-	    System.out.println("/9: View all requests in system");
-	    System.out.println("/10: View all projects in system");
-	    System.out.println("/11: Generate project details");
-	    
-	    Scanner sc = new Scanner(System.in);
-	    choice = sc.nextLine();
-	    if(choice.equals("/1")) {setPassword();}
-	    else if(choice.equals("/2")) {super.viewAllRequests();}
-	    else if(choice.equals("/3")) {super.viewPendingRequests();}
-	    else if(choice.equals("/4")) {super.viewAllProjects();}
-	    else if(choice.equals("/5")) {super.createProject();}
-	    else if(choice.equals("/6")) {super.changeTitle();}
-	    else if(choice.equals("/7")) {super.settleRequests();}
-	    else if(choice.equals("/8")) {super.transfer();}
-	    else if(choice.equals("/9")) {
-	      //EVERYTHING IN DATABASE
-	      for(int i=0; i<DatabaseRequestAccessor.getSize(); i++) {
-	        RequestPrinter.printAllRequest(i);
-	      }
-	    }
-	    else if(choice.equals("/10")) {
-	      for(int i=0; i<DatabaseProjectAccessor.getSize(); i++) {
-	        ProjectPrinter.printAllProject(i);
-	      }
-	    }
-	    else if(choice.equals("/11")) {generateProjectDetails();}
-	    else if(choice.equals("/0")) {System.out.println("Logging out...");}
-	    
-	    else {System.out.println("Invalid option chosen. Please try again.");}
-	}
-	    
-	    
+		    System.out.println("/1: Change password");
+		    System.out.println("/2: View your request history");
+		    System.out.print("/3: View pending requests");
+		    if(super.getincomingRequest().size() > super.getSettledRequests()) System.out.print(" NEW!");
+		    System.out.println();
+		    System.out.println("/4: View your projects");
+		    System.out.println("/5: Create a new project");
+		    System.out.println("/6: Update project title");
+		    System.out.println("/7: Settle requests");
+		    System.out.println("/8: Request project transfer");
+		    System.out.println("/9: View all requests in system");
+		    System.out.println("/10: View all projects in system");
+		    System.out.println("/11: Generate project details");
+
+		    Scanner sc = new Scanner(System.in);
+		    choice = sc.nextLine();
+		    if(choice.equals("/1")) {setPassword();}
+		    else if(choice.equals("/2")) {super.viewAllRequests();}
+		    else if(choice.equals("/3")) {super.viewPendingRequests();}
+		    else if(choice.equals("/4")) {super.viewAllProjects();}
+		    else if(choice.equals("/5")) {super.createProject();}
+		    else if(choice.equals("/6")) {super.changeTitle();}
+		    else if(choice.equals("/7")) {super.settleRequests();}
+		    else if(choice.equals("/8")) {super.transfer();}
+		    else if(choice.equals("/9")) {
+		      //EVERYTHING IN DATABASE
+		      for(int i=0; i<DatabaseRequestAccessor.getSize(); i++) {
+			RequestPrinter.printAllRequest(i);
+		      }
+		    }
+		    else if(choice.equals("/10")) {
+		      for(int i=0; i<DatabaseProjectAccessor.getSize(); i++) {
+			ProjectPrinter.printAllProject(i);
+		      }
+		    }
+		    else if(choice.equals("/11")) {generateProjectDetails();}
+		    else if(choice.equals("/0")) {System.out.println("Logging out...");}
+
+		    else {System.out.println("Invalid option chosen. Please try again.");}
+		}	    
 	  }
 }
