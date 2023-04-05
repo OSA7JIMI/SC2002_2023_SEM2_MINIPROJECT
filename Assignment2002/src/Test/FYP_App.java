@@ -23,7 +23,6 @@ public class FYP_App {
 		System.out.println();
 		
 		boolean end = false;
-		boolean logout = false;
 			
 		while(!end){
 		      System.out.println("Welcome to the FYP registration system!");
