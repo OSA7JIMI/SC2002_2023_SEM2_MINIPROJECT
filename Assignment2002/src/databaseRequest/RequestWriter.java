@@ -9,7 +9,7 @@ import Test.Project;
 
 public class RequestWriter {
 
-	public static void main(String[] args) {
+	public static void run() {
 		try {
 			
 			PrintWriter out = new PrintWriter(new FileWriter("C:/Users/user/Desktop/2002CSV/Frequest_list.txt", false));
@@ -42,7 +42,7 @@ public class RequestWriter {
 			
 		} finally {
 			
-			System.out.println("requests updated");
+			System.out.println("Request updated");
 		}
 	}
 

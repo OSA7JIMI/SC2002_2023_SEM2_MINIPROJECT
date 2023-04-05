@@ -8,7 +8,7 @@ import Test.Project;
 
 public class ProjectWriter {
 
-	public static void main(String[] args) {
+	public static void run() {
 		try {
 			
 			PrintWriter out = new PrintWriter(new FileWriter("C:/Users/user/Desktop/2002CSV/Fproject_list.txt", false));
@@ -33,7 +33,7 @@ public class ProjectWriter {
 			
 		} finally {
 			
-			System.out.println("projects updated");
+			System.out.println("Project updated");
 		}
 	}
 

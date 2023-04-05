@@ -9,7 +9,13 @@ public class DatabaseProjectAccessor {
 	}
 	
 	public static Project getProject(int id) {
-		return ProjectArray.projectArray.get(id);
+		try {
+			return ProjectArray.projectArray.get(id);
+		}
+		catch(Exception e) {
+			System.out.println("ProjectID not found");
+			return null;
+		}
 	}
 	
 	/*public static void updateProjectStatusInDatabase(int id, int status) {

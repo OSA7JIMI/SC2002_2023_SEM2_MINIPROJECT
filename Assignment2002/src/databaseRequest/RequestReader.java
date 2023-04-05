@@ -19,7 +19,7 @@ public class RequestReader {
 
 	private static final String COMMA_DELIMITER = ",";
 
-	public static void main(String[] args) {
+	public static void run() {
 		RequestReader database = new RequestReader();
 		database.init_database();
 		

@@ -70,8 +70,21 @@ public class Student extends User {
 	
 	public void allocate() {
 		if(!deregistered) {
+			if(DatabaseProjectAccessor.getSize()==0) {
+				System.out.println("No projects created");
+				return;
+			}
 			System.out.println("Enter projectID to be allocated");
-			int projectID = sc.nextInt();
+			
+			int projectID ;
+			try {
+				projectID = Integer.parseInt(sc.nextLine());
+			}
+			catch(Exception e) {
+				System.out.println("Invalid input");
+				return;
+			}
+			
 			Request r = new RequestAllocate(projectID);
 			r.requestIndex = DatabaseRequestAccessor.getSize();
 			r.senderID = this.getUserID();

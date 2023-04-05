@@ -18,12 +18,12 @@ public class UserArray {
 	static ArrayList<User> records = new ArrayList<User>();
 	public static FYPCoordinator fyp;
 
-	public static void main(String[] args) {
+	public static void run() {
 		UserArray database = new UserArray();
 		database.init_database();
 		
 		//DEBUG
-		System.out.println("test");
+		//System.out.println("test");
 		//DEBUG
 		
 		User.setFYPcoor(fyp);

@@ -65,7 +65,7 @@ public class Supervisor extends User{
 		}
 		else {
 			System.out.println("Enter the sender ID to settle his/her request");
-			String sID = sc.next();
+			String sID = sc.nextLine();
 			int i;
 			for(i = 0; i < incomingRequest.size();i++) {
 				if(DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).senderID.equals(sID) && DatabaseRequestAccessor.getRequest(incomingRequest.get(i)).pending==true) {
@@ -80,7 +80,16 @@ public class Supervisor extends User{
 		else {
 			Request r = DatabaseRequestAccessor.getRequest(ID);
 			System.out.println("Enter 0 to reject, 1 to approve");
-			int choice = sc.nextInt();
+			
+			int choice;
+			try {
+				choice = Integer.parseInt(sc.nextLine());
+			}
+			catch(Exception e) {
+				System.out.println("Invalid input");
+				return;
+			}
+			
 			if(choice==0) {r.settleRequest(false);}
 			else {r.settleRequest(true);}
 		}
@@ -90,7 +99,7 @@ public class Supervisor extends User{
 	//NEW
 	protected void createProject() {
 		System.out.println("Enter project title");
-		String title = sc.next();
+		String title = sc.nextLine();
 		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this.getUserID());
 		
 		if(this.numProject>=2) {
@@ -109,10 +118,29 @@ public class Supervisor extends User{
 	}
 
 	protected void  transfer() {
+		if(numProject==0) {
+			System.out.println("No projects to transfer");
+			return;
+		}
 		System.out.println("Please enter the projectID you want to transfer to another supervisor: ");
-		int projectID = sc.nextInt();
+		
+		int projectID;
+		try {
+			projectID = Integer.parseInt(sc.nextLine());
+		}
+		catch(Exception e) {
+			System.out.println("Invalid input");
+			return;
+		}
+		
+		Project p = DatabaseProjectAccessor.getProject(projectID);
+		if(!p.getSupervisorID().equals(this.getUserID())) {
+			System.out.println("Project not created by current user");
+			return;
+		}
+		
 		System.out.println("Please enter the replacement supervisorId");
-		String replacementID = sc.next();
+		String replacementID = sc.nextLine();
 		Request r = new RequestTransfer(projectID, replacementID);
 		r.requestIndex = DatabaseRequestAccessor.getSize();
 		r.senderID = this.getUserID();
@@ -134,12 +162,32 @@ public class Supervisor extends User{
 	}
 
 	public void changeTitle() {
+		if(DatabaseProjectAccessor.getSize()==0) {
+			System.out.println("No projects created");
+			return;
+		}
+		
 		System.out.println("Enter the project id: ");
-		Scanner scan = new Scanner(System.in);
-		int id = scan.nextInt();
-		Project p = getProject(id);
-		System.out.println("Enter the new title: ");
 		Scanner sc = new Scanner(System.in);
+		
+		int id;
+		try {
+			id = Integer.parseInt(sc.nextLine());
+		}
+		catch(Exception e) {
+			System.out.println("Invalid input");
+			return;
+		}
+		
+		Project p = DatabaseProjectAccessor.getProject(id);
+		
+		if(p==null) return;
+		else if(!p.getSupervisorID().equals(this.getUserID())) {
+			System.out.println("Project not created by current user");
+			return;
+		}
+		
+		System.out.println("Enter the new title: ");
 		String newTitle = sc.nextLine();
 		p.setTitle(newTitle);
 		DatabaseProjectAccessor.updateProjectInDatabase(p);

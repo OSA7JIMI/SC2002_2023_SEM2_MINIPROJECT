@@ -14,7 +14,7 @@ public class ProjectReader {
 
 	private static final String COMMA_DELIMITER = ",";
 
-	public static void main(String[] args) {
+	public static void run() {
 		ProjectReader database = new ProjectReader();
 		database.init_database();
 		

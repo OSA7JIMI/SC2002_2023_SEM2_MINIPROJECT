@@ -15,9 +15,9 @@ public class FYP_App {
 	public static void main(String[] args) {
 		System.out.println("-----DEBUG-----");
 		
-		UserArray.main(args);
-		ProjectReader.main(args);
-		RequestReader.main(args);
+		UserArray.run();
+		ProjectReader.run();
+		RequestReader.run();
 		
 		System.out.println("-----DEBUG-----");
 		System.out.println();
@@ -52,7 +52,7 @@ public class FYP_App {
 		
 		// TODO update csv
 		System.out.println("program ending");
-		ProjectWriter.main(args);
-		RequestWriter.main(args);
+		ProjectWriter.run();
+		RequestWriter.run();
 	}
 }
