@@ -148,9 +148,11 @@ public class Student extends User {
 
 	public void viewPendingRequests(){
 		System.out.println("---Pending requests---");
+		System.out.println("---Incoming requests---");
 		for(int i=0; i<incomingRequest.size(); i++) {
 			RequestPrinter.printAllPendingRequest(incomingRequest.get(i));
 		}
+		System.out.println("---Outgoing requests---");
 		for(int i=0; i<outgoingRequest.size(); i++) {
 			RequestPrinter.printAllPendingRequest(outgoingRequest.get(i));
 		}
@@ -158,12 +160,12 @@ public class Student extends User {
 
 	public void viewAllRequests() {
 		System.out.println("---All requests---");
-		System.out.println("Incoming");
+		System.out.println("---Incoming requests---");
 		for(int i=0; i<incomingRequest.size(); i++) {
 			RequestPrinter.printAllRequest(incomingRequest.get(i));
 		}
 		System.out.println(" ");
-		System.out.println("Outgoing");
+		System.out.println("---Outgoing requests---");
 		for(int i=0; i<outgoingRequest.size(); i++) {
 			RequestPrinter.printAllRequest(outgoingRequest.get(i));
 		}
