@@ -111,6 +111,10 @@ public class Supervisor extends User{
 		projectArray.add(DatabaseProjectAccessor.getSize()-1);
 	}
 	public void viewAllProjects() {	
+		if(numProject==0) {
+			System.out.println("You have not created any projects yet");
+			return;
+		}
 		int i;
 		for (i = 0; i < projectArray.size(); i ++) {
 			System.out.println("Project ID: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getID() + "  Title: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getTitle() + "  Status: " + DatabaseProjectAccessor.getProject(projectArray.get(i)).getStatus());
@@ -143,10 +147,10 @@ public class Supervisor extends User{
 		String replacementID = sc.nextLine();
 		Request r = new RequestTransfer(projectID, replacementID);
 		r.requestIndex = DatabaseRequestAccessor.getSize();
-		r.senderID = this.getUserID();
+		r.senderID = getUserID();
 		r.receiverID = FYPcoor.getUserID();
 		int index = DatabaseRequestAccessor.addRequest(r);
-		this.outgoingRequest.add(index);
+		toutgoingRequest.add(index);
 		//will change the line below after userarray is implemented
 		User.FYPcoor.addToIncomingRequest(index);
 	}
@@ -197,41 +201,41 @@ public class Supervisor extends User{
 	    String choice = "dummy";
 	    while (!choice.equals("/0")) {
 	      System.out.println("/0: Log out");
-	    System.out.println("/1: Change password");
-	    System.out.println("/2: View your request history");
-	    System.out.print("/3: View pending requests");
-	    if(incomingRequest.size() > settledRequests) System.out.print(": NEW!");
-	    System.out.println();
-	    System.out.println("/4: View your projects");
-	    System.out.println("/5: Create a new project");
-	    System.out.println("/6: Update project title");
-	    System.out.println("/7: Settle requests");
-	    System.out.println("/8: Request project transfer");
+		    System.out.println("/1: Change password");
+		    System.out.println("/2: View your request history");
+		    System.out.print("/3: View pending requests");
+		    if(incomingRequest.size() > settledRequests) System.out.print(": NEW!");
+		    System.out.println();
+		    System.out.println("/4: View your projects");
+		    System.out.println("/5: Create a new project");
+		    System.out.println("/6: Update project title");
+		    System.out.println("/7: Settle requests");
+		    System.out.println("/8: Request project transfer");
 
-	    choice = sc.nextLine();
-	    if(choice.equals("/1")) {setPassword();}
-	    else if(choice.equals("/2")) {viewAllRequests();}
-	    else if(choice.equals("/3")) {viewPendingRequests();}
-	    else if(choice.equals("/4")) {viewAllProjects();}
-	    else if(choice.equals("/5")) {createProject();}
-	    else if(choice.equals("/6")) {changeTitle();}
-	    else if(choice.equals("/7")) {settleRequests();}
-	    else if(choice.equals("/8")) {transfer();}
-	    else if(choice.equals("/0")) {System.out.println("Logging out...");}
-	    
-	    else {System.out.println("Invalid option chosen. Please try again.");}
-	}
-	    
-	   
+		    choice = sc.nextLine();
+		    if(choice.equals("/1")) {setPassword();}
+		    else if(choice.equals("/2")) {viewAllRequests();}
+		    else if(choice.equals("/3")) {viewPendingRequests();}
+		    else if(choice.equals("/4")) {viewAllProjects();}
+		    else if(choice.equals("/5")) {createProject();}
+		    else if(choice.equals("/6")) {changeTitle();}
+		    else if(choice.equals("/7")) {settleRequests();}
+		    else if(choice.equals("/8")) {transfer();}
+		    else if(choice.equals("/0")) {System.out.println("Logging out...");}
+
+		    else {System.out.println("Invalid option chosen. Please try again.");}
+		}	     
 	  }
 
 				
 	
 	public void viewPendingRequests(){
 		System.out.println("---Pending requests---");
+		System.out.println("---Incoming requests---");
 		for(int i=0; i<incomingRequest.size(); i++) {
 			RequestPrinter.printAllPendingRequest(incomingRequest.get(i));
 		}
+		System.out.println("---Outgoing requests---");
 		for(int i=0; i<outgoingRequest.size(); i++) {
 			RequestPrinter.printAllPendingRequest(outgoingRequest.get(i));
 		}
