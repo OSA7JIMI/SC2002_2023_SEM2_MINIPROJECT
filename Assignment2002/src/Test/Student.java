@@ -15,7 +15,7 @@ import Request.RequestDeregister;
 
 public class Student extends User {
 	private int projectID = -1;
-	private String supervisorID;
+	//private String supervisorID;
 	private boolean deregistered = false;
 	
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
@@ -27,9 +27,9 @@ public class Student extends User {
 		super(name, email, ID); 
 	}
 	
-	public void setSupervisor(String sp) {
+	/*public void setSupervisor(String sp) {
 		this.supervisorID = sp;
-	}
+	}*/
 	
 	public void setProject(int projectID) {
 		this.projectID = projectID;
@@ -64,7 +64,7 @@ public class Student extends User {
 		r.requestIndex = DatabaseRequestAccessor.getSize();
 		DatabaseRequestAccessor.addRequest(r);
 		this.outgoingRequest.add(r.requestIndex);
-		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(supervisorID);
+		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(p.getSupervisorID());
 		sp.addToIncomingRequest(r.requestIndex);
 	}
 	
