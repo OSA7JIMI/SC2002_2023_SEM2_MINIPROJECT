@@ -6,21 +6,21 @@ import Test.Project;
 
 public class RequestChangeTitle extends Request{
 	public RequestChangeTitle(String newTitle) {
-		this.pending = true;
-		this.type = 0;
-		this.Title = newTitle;
+		setpending(true);
+		settype(0);
+		setTitle(newTitle);
 	}
 	public RequestChangeTitle() {
 	}
 	@Override
 	public void settleRequest(boolean approval) {
-		this.pending = false;
-		this.approval = approval;
+		setpending(false);
+		setapproval(approval);
 		if(approval==true) {
-			Project p = DatabaseProjectAccessor.getProject(projectID);
-			p.setTitle(Title);
+			Project p = DatabaseProjectAccessor.getProject(getprojectID());
+			p.setTitle(getTitle());
 			DatabaseProjectAccessor.updateProjectInDatabase(p);
 		}
-		DatabaseRequestAccessor.updateRequestInArray(this, requestIndex);
+		DatabaseRequestAccessor.updateRequestInArray(this, getrequestIndex());
 	}
 }
