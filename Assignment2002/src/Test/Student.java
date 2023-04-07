@@ -15,7 +15,6 @@ import Request.RequestDeregister;
 
 public class Student extends User {
 	private int projectID = -1;
-	//private String supervisorID;
 	private boolean deregistered = false;
 	
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
@@ -27,16 +26,12 @@ public class Student extends User {
 		super(name, email, ID); 
 	}
 	
-	/*public void setSupervisor(String sp) {
-		this.supervisorID = sp;
-	}*/
-	
 	public void setProject(int projectID) {
 		this.projectID = projectID;
 	}
 	
 	public int getProjectID() {
-		return this.projectID;
+		return projectID;
 	}
 	
 	public void setDeregister() {
@@ -59,8 +54,8 @@ public class Student extends User {
 		System.out.println("Enter new title");
 		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
-		r.senderID = this.getUserID();
-		r.receiverID = supervisorID;
+		r.senderID = getUserID();
+		r.receiverID = p.supervisorID();
 		r.requestIndex = DatabaseRequestAccessor.getSize();
 		DatabaseRequestAccessor.addRequest(r);
 		this.outgoingRequest.add(r.requestIndex);
@@ -87,7 +82,7 @@ public class Student extends User {
 			
 			Request r = new RequestAllocate(projectID);
 			r.requestIndex = DatabaseRequestAccessor.getSize();
-			r.senderID = this.getUserID();
+			r.senderID = getUserID();
 			r.receiverID = FYPcoor.getUserID();
 			int index = DatabaseRequestAccessor.addRequest(r);
 			this.incomingRequest.add(index);
@@ -117,6 +112,7 @@ public class Student extends User {
 	      System.out.println("/1: Change password");
 	      System.out.println("/2: View request history");
 	      System.out.println("/3: View pending requests");
+		    
 	      if (projectID==-1) {
 	        System.out.println("/4: View all available projects");
 	        System.out.println("/5: Request project allocation");
@@ -129,6 +125,7 @@ public class Student extends User {
 	        else if(choice.equals("/0")) {System.out.println("Logging out...");}
 	        else {System.out.println("Invalid option");}
 	      }
+		    
 	      else {
 	        System.out.println("/4: View your project");
 	        System.out.println("/5: Request to change your project title");
