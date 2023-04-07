@@ -13,9 +13,9 @@ public class RequestAllocate extends Request{
 	
 	public RequestAllocate(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
-		this.pending = true;
-		this.type = 1;
-		this.projectID  = projectID;
+		setpending(true);
+		settype(1);
+		setprojectID(projectID);
 		p.setStatus(1);
 		DatabaseProjectAccessor.updateProjectInDatabase(p);
 	}
@@ -23,29 +23,30 @@ public class RequestAllocate extends Request{
 	}
 	@Override
 	public void settleRequest(boolean approval) {
-		Student s = (Student)databaseUserAccessor.getUser(this.senderID);
-		Project p = DatabaseProjectAccessor.getProject(projectID);
-		this.pending = false;
-		this.approval = approval;
+		Student s = (Student)databaseUserAccessor.getUser(getsenderID());
+		Project p = DatabaseProjectAccessor.getProject(getprojectID());
+		setpending(false);
+		setapproval(approval);
 		
 		if(s.getProjectID()!=-1) {
 			System.out.println("Student has already been assigned to a project, auto rejecting");
-			this.approval = false;
+			setapproval(false);
 		}
-		if(this.approval==false) {
-			this.projectID = -1;
+		
+		if(this.getapproval()==false) {
+			setprojectID(-1);
 			p.setStatus(0);
 		}else {
 			Supervisor sp = (Supervisor) databaseUserAccessor.getUser(p.getSupervisorID());
 			if(sp.getNumProject()>=2) {
-				this.approval = false;
+				setapproval(false);
 				p.setStatus(3);
 				System.out.println("Supervisor limit reached");
 			}else {
 				//Get student from userArray, then use the .setProject()
 				//method to allocate project to student
-				s.setProject(this.projectID);
-				p.setStudent(senderID);
+				s.setProject(getprojectID());
+				p.setStudent(getsenderID());
 				sp.incrementNumProject();
 				p.setStatus(2);
 				if(sp.getNumProject()==2) {
@@ -54,6 +55,6 @@ public class RequestAllocate extends Request{
 				}
 			}
 		}
-		DatabaseRequestAccessor.updateRequestInArray(this, requestIndex);
+		DatabaseRequestAccessor.updateRequestInArray(this, getrequestIndex());
 	}
 }
