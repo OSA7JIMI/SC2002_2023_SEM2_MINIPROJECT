@@ -26,8 +26,7 @@ public class RequestTransfer extends Request{
 	@Override
 	public void settleRequest(boolean approval) {
 
-		//added to check if replacement supervisor has capacity to take 1 more proj
-		Supervisor replacement = (Supervisor)databaseUserAccessor.getUser(replacementID);
+		Supervisor replacement = (Supervisor)databaseUserAccessor.getUser(getreplacementID());
 
 		if(replacement.getNumProject() >= 2){
 			RequestPrinter.alertMessage();
