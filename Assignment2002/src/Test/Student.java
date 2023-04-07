@@ -54,11 +54,11 @@ public class Student extends User {
 		System.out.println("Enter new title");
 		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
-		r.senderID = getUserID();
-		r.receiverID = p.supervisorID();
-		r.requestIndex = DatabaseRequestAccessor.getSize();
+		r.setsenderID(getUserID());
+		r.setreceiverID(p.supervisorID());
+		r.setrequestIndex(DatabaseRequestAccessor.getSize());
 		DatabaseRequestAccessor.addRequest(r);
-		this.outgoingRequest.add(r.requestIndex);
+		outgoingRequest.add(r.getrequestIndex());
 		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(p.getSupervisorID());
 		sp.addToIncomingRequest(r.requestIndex);
 	}
@@ -81,9 +81,9 @@ public class Student extends User {
 			}
 			
 			Request r = new RequestAllocate(projectID);
-			r.requestIndex = DatabaseRequestAccessor.getSize();
-			r.senderID = getUserID();
-			r.receiverID = FYPcoor.getUserID();
+			r.setsenderID(getUserID());
+			r.setreceiverID(FYPcoor.getUserID());
+			r.setrequestIndex(DatabaseRequestAccessor.getSize());
 			int index = DatabaseRequestAccessor.addRequest(r);
 			this.incomingRequest.add(index);
 			FYPcoor.addToIncomingRequest(index);
@@ -97,8 +97,9 @@ public class Student extends User {
 	private void deregister() {
 		System.out.println("Deregistering project request sent");
 		Request r = new RequestDeregister();
-		r.senderID = this.getUserID();
-		r.receiverID = FYPcoor.getUserID();
+		r.setsenderID(getUserID());
+		r.setreceiverID(FYPcoor.getUserID());
+		r.setrequestIndex(DatabaseRequestAccessor.getSize());
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
 		User.FYPcoor.addToIncomingRequest(index);
