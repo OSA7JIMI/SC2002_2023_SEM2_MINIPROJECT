@@ -9,17 +9,17 @@ import databaseUser.databaseUserAccessor;
 
 public class RequestDeregister extends Request{
 	public RequestDeregister() {
-		this.pending = true;
-		this.type = 2;
+		setpending(true);
+		settype(2);
 	}
 	@Override
 	public void settleRequest(boolean approval) {
-		this.pending = false;
-		this.approval = approval;
+		setpending(false);
+		setapproval(approval);
 		if(approval==true) {
-			Project p = DatabaseProjectAccessor.getProject(projectID);	
+			Project p = DatabaseProjectAccessor.getProject(getprojectID());	
 			Supervisor sp = (Supervisor) databaseUserAccessor.getUser(p.getSupervisorID());
-			Student s = (Student)databaseUserAccessor.getUser(senderID);
+			Student s = (Student)databaseUserAccessor.getUser(getsenderID());
 			s.setDeregister();
 			sp.decrementNumProject();
 			ProjectStatusUpdator.setAllProjectsAvailable(sp.getUserID());
