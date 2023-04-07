@@ -36,8 +36,8 @@ public class FYP_App {
 		      String password = scan.nextLine();
 
 		      while(!password.equals(currentUser.getPassword())) {
-		        System.out.println("Password is incorrect, please try again");
-		        password = scan.nextLine();
+			      System.out.println("Password is incorrect, please try again");
+			      password = scan.nextLine();
 		      }
 
 		      System.out.println("Welcome,"+ currentUser.getName()+ ", you have successfully logged in");
@@ -47,9 +47,9 @@ public class FYP_App {
 		      System.out.println("Press enter to continue, type /end to end");
 		      String check = scan.nextLine();
 		      if(check.equals("/end")) {end = true;}
-		    }
+		}
 		
-		// TODO update csv
+		// update csv
 		System.out.println("program ending");
 		ProjectWriter.run();
 		RequestWriter.run();
