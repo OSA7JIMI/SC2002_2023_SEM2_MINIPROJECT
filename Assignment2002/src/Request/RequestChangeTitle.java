@@ -16,7 +16,7 @@ public class RequestChangeTitle extends Request{
 	public void settleRequest(boolean approval) {
 		setpending(false);
 		setapproval(approval);
-		if(approval==true) {
+		if(getapproval()==true) {
 			Project p = DatabaseProjectAccessor.getProject(getprojectID());
 			p.setTitle(getTitle());
 			DatabaseProjectAccessor.updateProjectInDatabase(p);
