@@ -16,10 +16,10 @@ public class RequestTransfer extends Request{
 	Scanner sc = new Scanner(System.in);
 	
 	public RequestTransfer(int projectID, String supervisorID) {
-		this.pending = true;
-		this.type = 3;
-		this.replacementID = supervisorID;
-		this.projectID = projectID;
+		setpending(true);
+		settype(3);
+		setreplacementID(supervisorID);
+		setprojectID(projectID);
 	}
 	public RequestTransfer() {
 	}
@@ -32,25 +32,25 @@ public class RequestTransfer extends Request{
 		if(replacement.getNumProject() >= 2){
 			RequestPrinter.alertMessage();
 			int choice = sc.nextInt();
-			if(choice==0) {dblapproval =false;}
-			else {dblapproval =true;}
+			if(choice==0) {setdblapproval(false);}
+			else {setdblapproval(true);}
 		}
 
-		this.pending = false;
-		this.approval = approval;
-		if(approval == true && dblapproval == true) { //changed here to include dblapproval
-			Project p = DatabaseProjectAccessor.getProject(projectID);
-			p.setSupervisor(replacementID);
+		setpending(false);
+		setapproval(approval);
+		if(getapproval() == true && getdblapproval() == true) { 
+			Project p = DatabaseProjectAccessor.getProject(getprojectID());
+			p.setSupervisor(getreplacementID());
 			DatabaseProjectAccessor.updateProjectInDatabase(p);
 			//Student s = (Student)databaseUserAccessor.getUser(senderID);
 			//s.setSupervisor(this.replacementID);
-			Supervisor original = (Supervisor)databaseUserAccessor.getUser(senderID);
+			Supervisor original = (Supervisor)databaseUserAccessor.getUser(getsenderID());
 			//Supervisor replacement = (Supervisor)databaseUserAccessor.getUser(replacementID);
-			original.removeProjectFromArray(projectID);
+			original.removeProjectFromArray(getprojectID());
 			original.decrementNumProject();
 			ProjectStatusUpdator.setAllProjectsAvailable(original.getUserID());
 			replacement.incrementNumProject();
-			replacement.addProjectToArray(projectID);
+			replacement.addProjectToArray(getprojectID());
 			if(replacement.getNumProject()>=2) {
 				ProjectStatusUpdator.setAllProjectsUnavailable(replacement.getUserID());
 			}
