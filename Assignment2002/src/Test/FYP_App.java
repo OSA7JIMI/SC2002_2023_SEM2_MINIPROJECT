@@ -40,7 +40,7 @@ public class FYP_App {
 			      password = scan.nextLine();
 		      }
 
-		      System.out.println("Welcome, "+ currentUser.getName()+ ", you have successfully logged in");
+		      System.out.println("Welcome "+ currentUser.getName()+ ", you have successfully logged in");
 
 		      currentUser.displayOptions();
 		      System.out.println(); //for visibility
