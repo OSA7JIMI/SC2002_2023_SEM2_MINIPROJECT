@@ -10,4 +10,7 @@ public class databaseUserAccessor {
 		List<User> gottem = UserArray.records.stream().filter(u -> u.getUserID().equals(userID)).collect(Collectors.toList());
 		return gottem.get(0);
 	}
+	public static void addUser(User u){
+		UserArray.records.add(u);
+	}
 }
