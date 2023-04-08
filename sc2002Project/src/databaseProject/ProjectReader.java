@@ -25,7 +25,7 @@ public class ProjectReader {
 	}
 
 	
-	private  void init_database() {
+	private void init_database() {
 		String Project_path = "/Users/leaf/NTU 12/SC2002/Fproject_list.txt";
 		read_csv_to_records(Project_path);
 	}
