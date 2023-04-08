@@ -15,7 +15,6 @@ import Request.RequestDeregister;
 
 public class Student extends User {
 	private int projectID = -1;
-	private String supervisorID;
 	private boolean deregistered = false;
 	
 	private ArrayList<Integer> incomingRequest = new ArrayList<Integer>();
@@ -27,22 +26,17 @@ public class Student extends User {
 		super(name, email, ID); 
 	}
 	
-	public void setSupervisor(String sp) {
-		this.supervisorID = sp;
-	}
-	
 	public void setProject(int projectID) {
 		this.projectID = projectID;
 	}
 	
 	public int getProjectID() {
-		return this.projectID;
+		return projectID;
 	}
 	
 	public void setDeregister() {
 		deregistered = true;
-		this.projectID = -1;
-		this.supervisorID = null;
+		projectID = -1;
 	}
 	
 	public void viewAllProjects() {
@@ -61,12 +55,13 @@ public class Student extends User {
 		System.out.println("Enter new title");
 		String newTitle = sc.nextLine();
 		Request r = new RequestChangeTitle(newTitle);
-		r.setsenderID (this.getUserID());
-		r.setreceiverID(supervisorID);
+		Project p = DatabaseProjectAccessor.getProject(projectID);
+		r.setsenderID (getUserID());
+		r.setreceiverID(p.getSupervisorID());
 		r.setrequestIndex(DatabaseRequestAccessor.getSize());
 		DatabaseRequestAccessor.addRequest(r);
-		this.outgoingRequest.add(r.getrequestIndex());
-		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(DatabaseProjectAccessor.getProject(this.projectID).getSupervisorID());
+		outgoingRequest.add(r.getrequestIndex());
+		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(DatabaseProjectAccessor.getProject(projectID).getSupervisorID());
 		sp.addToIncomingRequest(r.getrequestIndex());
 	}
 	
@@ -89,10 +84,10 @@ public class Student extends User {
 			
 			Request r = new RequestAllocate(projectID);
 			r.setrequestIndex(DatabaseRequestAccessor.getSize());
-			r.setsenderID (this.getUserID());
+			r.setsenderID (getUserID());
 			r.setreceiverID(FYPcoor.getUserID()); 
 			int index = DatabaseRequestAccessor.addRequest(r);
-			this.incomingRequest.add(index);
+			incomingRequest.add(index);
 			FYPcoor.addToIncomingRequest(index);
 		}
 		else {
@@ -104,11 +99,12 @@ public class Student extends User {
 	private void deregister() {
 		System.out.println("Deregistering project request sent");
 		Request r = new RequestDeregister();
-		r.setsenderID (this.getUserID());
+		r.setrequestIndex(DatabaseRequestAccessor.getSize());
+		r.setsenderID (getUserID());
 		r.setreceiverID (FYPcoor.getUserID());
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
-		User.FYPcoor.addToIncomingRequest(index);
+		FYPcoor.addToIncomingRequest(index);
 	}
 	
 	public void displayOptions() { //Student
