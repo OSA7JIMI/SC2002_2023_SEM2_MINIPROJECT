@@ -39,6 +39,10 @@ public class Student extends User {
 		projectID = -1;
 	}
 	
+	public boolean getDeregister() {
+		return deregistered;
+	}
+	
 	public void viewAllProjects() {
 		ProjectPrinter.printAllAvailable();
 	}
