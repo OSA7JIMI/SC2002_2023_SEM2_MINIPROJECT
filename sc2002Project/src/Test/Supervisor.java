@@ -105,10 +105,10 @@ public class Supervisor extends User{
 	protected void createProject() {
 		System.out.println("Enter project title");
 		String title = sc.nextLine();
-		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, this.getUserID());
+		Project p = new Project(DatabaseProjectAccessor.getSize(), title, 0, getUserID());
 		incrementNumProjectCreated();
 		
-		if(this.numProject>=2) {
+		if(numProject>=2) {
 			System.out.println("Project limit reached, status set to unavailable");
 			p.setStatus(3);
 		}
@@ -144,8 +144,8 @@ public class Supervisor extends User{
 		}
 		
 		Project p = DatabaseProjectAccessor.getProject(projectID);
-		if(!p.getSupervisorID().equals(this.getUserID())) {
-			System.out.println("Project not created by current user");
+		if(!p.getSupervisorID().equals(getUserID())) {
+			System.out.println("This project was not created by you");
 			return;
 		}
 		
@@ -158,7 +158,7 @@ public class Supervisor extends User{
 		int index = DatabaseRequestAccessor.addRequest(r);
 		outgoingRequest.add(index);
 		//will change the line below after userarray is implemented
-		User.FYPcoor.addToIncomingRequest(index);
+		FYPcoor.addToIncomingRequest(index);
 	}
 	
 	public void viewAllRequests() {
@@ -192,8 +192,8 @@ public class Supervisor extends User{
 		Project p = DatabaseProjectAccessor.getProject(id);
 		
 		if(p==null) return;
-		else if(!p.getSupervisorID().equals(this.getUserID())) {
-			System.out.println("Project not created by current user");
+		else if(!p.getSupervisorID().equals(getUserID())) {
+			System.out.println("This project was not created by you");
 			return;
 		}
 		
@@ -230,7 +230,7 @@ public class Supervisor extends User{
 		    else if(choice.equals("/8")) {transfer();}
 		    else if(choice.equals("/0")) {System.out.println("Logging out...");}
 
-		    else {System.out.println("Invalid option chosen. Please try again.");}
+		    else {System.out.println("Invalid option");}
 		}	     
 	  }
 
