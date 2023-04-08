@@ -70,7 +70,7 @@ public class Student extends User {
 		sp.addToIncomingRequest(r.getrequestIndex());
 	}
 	
-	public void allocate() {
+	private void allocate() {
 		if(!deregistered) {
 			if(DatabaseProjectAccessor.getSize()==0) {
 				System.out.println("No projects created");
