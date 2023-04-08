@@ -13,7 +13,7 @@ public class UserReader {
 	public static FYPCoordinator fyp;
 
 	public static void run() {
-		UserArray database = new UserArray();
+		UserReader database = new UserReader();
 		database.init_database();
 		
 		//DEBUG
@@ -25,11 +25,11 @@ public class UserReader {
 
 	
 	private void init_database() {
-		String FYP_path = "/Users/leaf/NTU 12/SC2002/FFYP_coordinator.csv";
+		String FYP_path = "C:/Users/Dreamcore/OneDrive/Desktop/2002CSV/FFYP_coordinator.csv";
 		read_csv_to_records(FYP_path, "FYP");
-		String student_path = "/Users/leaf/NTU 12/SC2002/Fstudent_list.csv";
+		String student_path = "C:/Users/Dreamcore/OneDrive/Desktop/2002CSV/Fstudent_list.csv";
 		read_csv_to_records(student_path, "student");
-		String supervisor_path = "/Users/leaf/NTU 12/SC2002/Ffaculty_list.csv";
+		String supervisor_path = "C:/Users/Dreamcore/OneDrive/Desktop/2002CSV/Ffaculty_list.csv";
 		read_csv_to_records(supervisor_path, "supervisor");
 	}
 	
@@ -48,15 +48,17 @@ public class UserReader {
 		        	
 		        	if (user_type == "student") {
 		        		Student stu = new Student(values[0],values[1],userid);
-		        		DatabaseUserAccessor.addUser(stu);
+		        		int dereg = Integer.parseInt(values[2]);
+		        		if(dereg==1) stu.setDeregister();
+		        		databaseUserAccessor.addUser(stu);
 		        	}
 		        	else if (user_type == "supervisor") {
 		        		Supervisor sup = new Supervisor(values[0],values[1],userid);
-		        		DatabaseUserAccessor.addUser(sup);
+		        		databaseUserAccessor.addUser(sup);
 		        	}
 		        	else if (user_type == "FYP") {
 		        		fyp = new FYPCoordinator(values[0],values[1],userid);
-		        		DatabaseUserAccessor.addUser(fyp);
+		        		databaseUserAccessor.addUser(fyp);
 		        	}
 		        	
 		        }
