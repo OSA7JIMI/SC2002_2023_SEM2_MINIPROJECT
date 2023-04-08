@@ -29,7 +29,7 @@ public class FYPCoordinator extends Supervisor{
 				System.out.println("/3: generate based on supervisor id");
 				System.out.println("/4: generate based on project id");
 				choice = sc.nextLine();
-				if(choice.equals("/1") || choice.equals("/2")){
+				if(choice.equals("/1") || choice.equals("/2")|| choice.equals("/3")|| choice.equals("/4")){
 					valid=1;
 				}
 			}while(valid!=1);
@@ -145,7 +145,7 @@ public class FYPCoordinator extends Supervisor{
 		    else if(choice.equals("/11")) {generateProjectDetails();}
 		    else if(choice.equals("/0")) {System.out.println("Logging out...");}
 
-		    else {System.out.println("Invalid option chosen. Please try again.");}
+		    else {System.out.println("Invalid option");}
 		}	    
 	  }
 }
