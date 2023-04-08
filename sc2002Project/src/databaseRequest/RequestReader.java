@@ -30,12 +30,12 @@ public class RequestReader {
 	}
 
 	
-	public  void init_database() {
+	private void init_database() {
 		String Project_path = "/Users/leaf/NTU 12/SC2002/Frequest_list.txt";
 		read_csv_to_records(Project_path);
 	}
 	
-	public void read_csv_to_records(String file_path) {
+	private void read_csv_to_records(String file_path) {
 		try (BufferedReader br = new BufferedReader(new FileReader(file_path))) {
 		    String line;
 		    //br.readLine();
