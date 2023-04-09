@@ -43,7 +43,7 @@ public class Student extends User {
 		return deregistered;
 	}
 	
-	public void viewAllProjects() {
+	protected void viewAllProjects() {
 		ProjectPrinter.printAllAvailable();
 	}
 	
