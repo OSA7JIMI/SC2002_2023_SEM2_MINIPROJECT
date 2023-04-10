@@ -66,6 +66,7 @@ public class ProjectPrinter {
 	 * @param supervisorID ID of supervisor
 	 */ 
 	public static void printAllBasedOnSupervisor(String supervisorID) {
+		int check = 0;
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
 			if(p.getSupervisorID().equals(supervisorID)) {
@@ -89,8 +90,12 @@ public class ProjectPrinter {
 					break;
 				}
 				System.out.println();
+				check = 1;
 				System.out.println();
 			}
+		}
+		if(check == 0) {
+			System.out.println("This supervisor does not have any projects!");
 		}
 	}
 	
@@ -101,7 +106,7 @@ public class ProjectPrinter {
 	public static void printAllBasedOnStudent(String studentID) {
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
-			if(p.getStudentID().equals(studentID)) {
+			if(p.getStudentID()!= null && p.getStudentID().equals(studentID)) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Student : "+p.getStudentID());
