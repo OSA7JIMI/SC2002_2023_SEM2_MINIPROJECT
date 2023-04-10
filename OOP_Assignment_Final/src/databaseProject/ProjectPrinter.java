@@ -101,11 +101,7 @@ public class ProjectPrinter {
 	public static void printAllBasedOnStudent(String studentID) {
 		for(int i=0; i<ProjectArray.size; i++) {
 			Project p = DatabaseProjectAccessor.getProject(i);
-			if (p.getStudentID()==null) {
-				System.out.println("This student does not have a project");
-				return;
-			}
-			else if(p.getStudentID().equals(studentID)) {
+			if(p.getStudentID().equals(studentID)) {
 				System.out.println("ID : "+p.getID());
 				System.out.println("Title : "+p.getTitle());
 				System.out.println("Student : "+p.getStudentID());
@@ -130,6 +126,7 @@ public class ProjectPrinter {
 				return;
 			}
 		}
+		System.out.println("This student does not have a project");
 	}
 	
 	/**

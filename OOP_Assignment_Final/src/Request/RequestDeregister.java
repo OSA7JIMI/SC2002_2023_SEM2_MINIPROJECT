@@ -21,6 +21,7 @@ public class RequestDeregister extends Request{
 	public RequestDeregister() {
 		setpending(true);
 		settype(2);
+		System.out.println("Deregistration request sent");
 	}
 	@Override
 	public void settleRequest(boolean approval) {

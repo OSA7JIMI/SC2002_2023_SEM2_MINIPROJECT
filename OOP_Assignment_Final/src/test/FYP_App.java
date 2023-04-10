@@ -37,23 +37,12 @@ public class FYP_App {
 			
 		while(!end){
 		      System.out.println("Welcome to the FYP registration system!");
-		      //System.out.println("Please enter your user ID to log in: ");
 		      Scanner scan = new Scanner(System.in);
-		      //String ID = scan.nextLine();
-		      //User currentUser;
-		      int checkhere = 0;
-		      String ID = "ID";
-		      while(checkhere == 0) {
-		    	  try {
-			    	  System.out.println("Please enter your user ID to log in: ");
-			    	  ID = scan.nextLine();
-			    	  databaseUserAccessor.getUser(ID);
-			    	  checkhere = 1;
-			    	  }
-		    	  catch(Exception e) {
-		    		  System.out.println("Invalid username. Please enter again.");
-		    		  }
-		    	  }
+		      System.out.println("Please enter your user ID to log in: ");
+		      String ID = scan.nextLine();
+			  while(!databaseUserAccessor.isUserValid(ID)) {
+					ID = scan.nextLine();
+			    }
 		      User currentUser = databaseUserAccessor.getUser(ID);
 
 		      System.out.println("Please enter your password: ");

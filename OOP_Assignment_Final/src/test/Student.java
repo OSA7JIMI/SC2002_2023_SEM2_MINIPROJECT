@@ -96,7 +96,6 @@ public class Student extends User {
 		outgoingRequest.add(r.getrequestIndex());
 		Supervisor sp = (Supervisor) databaseUserAccessor.getUser(DatabaseProjectAccessor.getProject(projectID).getSupervisorID());
 		sp.addToIncomingRequest(r.getrequestIndex());
-		System.out.println("Title change request sent");
 	}
 	
 	private void allocate() {
@@ -116,6 +115,11 @@ public class Student extends User {
 				return;
 			}
 			
+			if(projectID>=DatabaseProjectAccessor.getSize()) {
+				System.out.println("Invalid project ID");
+				return;
+			}
+			
 			Request r = new RequestAllocate(projectID);
 			r.setrequestIndex(DatabaseRequestAccessor.getSize());
 			r.setsenderID (getUserID());
@@ -123,7 +127,6 @@ public class Student extends User {
 			int index = DatabaseRequestAccessor.addRequest(r);
 			incomingRequest.add(index);
 			FYPcoor.addToIncomingRequest(index);
-			System.out.println("Allocation request sent");
 		}
 		else {
 			System.out.println("Since you have previously deregistered a project, you are not allowed to register for another one.");
@@ -132,7 +135,6 @@ public class Student extends User {
 	}
 	
 	private void deregister() {
-		System.out.println("Deregistration request sent");
 		Request r = new RequestDeregister();
 		r.setrequestIndex(DatabaseRequestAccessor.getSize());
 		r.setsenderID (getUserID());

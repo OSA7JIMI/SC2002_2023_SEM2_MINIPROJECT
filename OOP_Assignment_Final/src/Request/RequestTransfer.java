@@ -29,6 +29,7 @@ public class RequestTransfer extends Request{
 		settype(3);
 		setreplacementID(supervisorID);
 		setprojectID(projectID);
+		System.out.println("Transfer request sent");
 	}
 	
 	/**

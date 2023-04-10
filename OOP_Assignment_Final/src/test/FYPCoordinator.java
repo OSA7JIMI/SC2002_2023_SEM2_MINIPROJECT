@@ -33,10 +33,10 @@ public class FYPCoordinator extends Supervisor{
 		String choice;
 		int valid=0;
 			do{
-				System.out.println("/1: generate based on status");
-				System.out.println("/2: generate based on student id");
-				System.out.println("/3: generate based on supervisor id");
-				System.out.println("/4: generate based on project id");
+				System.out.println("/1: Generate based on status");
+				System.out.println("/2: Generate based on student id");
+				System.out.println("/3: Generate based on supervisor id");
+				System.out.println("/4: Generate based on project id");
 				choice = sc.nextLine();
 				if(choice.equals("/1") || choice.equals("/2")|| choice.equals("/3")|| choice.equals("/4")){
 					valid=1;
@@ -46,10 +46,10 @@ public class FYPCoordinator extends Supervisor{
 				valid=0;
 				do{
 					System.out.println("Enter status of project:");
-					System.out.println("/1: available projects");
-					System.out.println("/2: reserved projects");
-					System.out.println("/3: taken projects");
-					System.out.println("/4: unavailable projects");
+					System.out.println("/1: Available projects");
+					System.out.println("/2: Reserved projects");
+					System.out.println("/3: Taken projects");
+					System.out.println("/4: Unavailable projects");
 					choice = sc.nextLine();
 					if(choice.equals("/1")){
 						ProjectPrinter.printAllBasedOnStatus(0);
@@ -72,43 +72,36 @@ public class FYPCoordinator extends Supervisor{
 
 			}
 			else if(choice.equals("/2")){
-				valid = 0;
-				String ID = " ";
 				Scanner scan = new Scanner(System.in);
-				while(valid == 0) {
-			    	  try {
-				    	  System.out.println("Enter student ID");
-				    	  ID = scan.nextLine();
-				    	  databaseUserAccessor.getUser(ID);
-				    	  valid = 1;
-				    	  }
-			    	  catch(Exception e) {
-			    		  System.out.println("Invalid ID. Please enter again.");
-			    		  }
+				System.out.println("Enter student ID");
+				String ID = scan.nextLine();
+				while(!databaseUserAccessor.isUserValid(ID)) {
+					ID = scan.nextLine();
 			    }
-				if(databaseUserAccessor.getUser(ID)!=null){
-					ProjectPrinter.printAllBasedOnStudent(ID);
 				
+				if(!(databaseUserAccessor.getUser(ID)instanceof Student)) {
+					System.out.println("This user is not a student");
+					return;
+				}
+				ProjectPrinter.printAllBasedOnStudent(ID);
+				
+			
 			}
 			else if(choice.equals("/3")){
-				System.out.println("test/3");
-				int valid1= 0;
-				ID = " ";
-				scan = new Scanner(System.in);
-				while(valid1 == 0) {
-			    	  try {
-				    	  System.out.println("Enter supervisor ID");
-				    	  ID = scan.nextLine();
-				    	  databaseUserAccessor.getUser(ID);
-				    	  valid1 = 1;
-				    	  }
-			    	  catch(Exception e) {
-			    		  System.out.println("Invalid ID. Please enter again.");
-			    		  }
+				Scanner scan = new Scanner(System.in);
+				System.out.println("Enter supervisor ID");
+				String ID = scan.nextLine();
+				while(!databaseUserAccessor.isUserValid(ID)) {
+					ID = scan.nextLine();
 			    }
-				if(databaseUserAccessor.getUser(ID)!=null){
-					ProjectPrinter.printAllBasedOnSupervisor(ID);
+				
+				if(!(databaseUserAccessor.getUser(ID)instanceof Supervisor)) {
+					System.out.println("This user is not a supervisor");
+					return;
 				}
+				
+				ProjectPrinter.printAllBasedOnSupervisor(ID);
+				
 			}
 			else if(choice.equals("/4")){
 				valid = 0;
@@ -120,11 +113,11 @@ public class FYPCoordinator extends Supervisor{
 						valid=1;
 					}
 					if(valid==0){
-						System.out.println("project id entered was invalid. Please try again.");
+						System.out.println("Project id entered was invalid. Please try again.");
 					}
 				}while(valid!=1);
 			}
-			}
+			
 	}
 	
 	/**

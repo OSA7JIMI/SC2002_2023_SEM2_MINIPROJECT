@@ -6,7 +6,9 @@ package test;
  *
  */
 public class Project {
-	//0 for available, 1 for reserved, 2 for allocated, 3 for unavailable
+	/**
+	 * 0 for available, 1 for reserved, 2 for allocated, 3 for unavailable
+	 */
 	private int status;
 	private int projectID;
 	private String projectTitle;

@@ -113,24 +113,18 @@ public class Supervisor extends User{
 	//NEW
 	protected void settleRequests() {
 		int ID = -1;
-		if(incomingRequest.size() == 0) {
-			System.out.println("There's no incoming request!");
+		if(incomingRequest.size() <= settledRequests) {
+			System.out.println("There are no requests to settle");
 			return;
 		}
+		
 		else { 
-			int checkhere = 0;
-		      String sID = "ID";
-		      while(checkhere == 0) {
-		    	  try {
-		    		  System.out.println("Enter the sender ID to settle his/her request");
-			    	  sID = sc.nextLine();
-			    	  databaseUserAccessor.getUser(sID);
-			    	  checkhere = 1;
-			    	  }
-		    	  catch(Exception e) {
-		    		  System.out.println("Invalid ID. Please enter again.");
-		    		  }
-		    	  }
+			System.out.println("Enter the sender ID to settle his/her request");
+			Scanner scan = new Scanner(System.in);
+			String sID = scan.nextLine();
+			while(!databaseUserAccessor.isUserValid(sID)) {
+				sID = scan.nextLine();
+		    }
 			
 			int i;
 			for(i = 0; i < incomingRequest.size();i++) {
@@ -215,19 +209,12 @@ public class Supervisor extends User{
 		}
 		
 		
-		int checkhere = 0;
-		String replacementID = " ";
-		while(checkhere == 0) {
-			try {
-				System.out.println("Please enter the replacement supervisor ID: ");
-				replacementID = sc.nextLine();
-				databaseUserAccessor.getUser(replacementID);
-				checkhere = 1;
-			}
-			catch(Exception e) {
-				System.out.println("Invalid ID. Please enter again.");
-			}
-		}
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter replacement supervisor ID");
+		String replacementID = scan.nextLine();
+		while(!databaseUserAccessor.isUserValid(replacementID)) {
+			replacementID = scan.nextLine();
+	    }
 		
 		Request r = new RequestTransfer(projectID, replacementID);
 		r.setrequestIndex(DatabaseRequestAccessor.getSize());
@@ -237,7 +224,6 @@ public class Supervisor extends User{
 		outgoingRequest.add(index);
 		//will change the line below after userarray is implemented
 		FYPcoor.addToIncomingRequest(index);
-		System.out.println("Transfer request sent");
 	}
 	
 	protected void viewAllRequests() {

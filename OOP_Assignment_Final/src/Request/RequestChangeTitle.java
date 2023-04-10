@@ -20,6 +20,7 @@ public class RequestChangeTitle extends Request{
 		setpending(true);
 		settype(0);
 		setTitle(newTitle);
+		System.out.println("Title change request sent");
 	}
 	
 	/**

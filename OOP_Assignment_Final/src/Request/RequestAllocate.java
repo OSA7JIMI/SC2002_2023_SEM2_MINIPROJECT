@@ -22,11 +22,15 @@ public class RequestAllocate extends Request{
 	 */
 	public RequestAllocate(int projectID) {
 		Project p = DatabaseProjectAccessor.getProject(projectID);
+		if(p.getStatus()!=0) {
+			System.out.println("This project is not available");
+		}
 		setpending(true);
 		settype(1);
 		setprojectID(projectID);
 		p.setStatus(1);
 		DatabaseProjectAccessor.updateProjectInDatabase(p);
+		System.out.println("Allocation request sent");
 	}
 	
 	/**

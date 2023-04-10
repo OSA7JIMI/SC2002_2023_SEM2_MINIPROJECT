@@ -1,0 +1,11 @@
+Before starting the FYP registration system:
+- Ensure that the "databases" folder is in the same folder as "bin" and "src"
+- Check that it contains 5 files, Ffaculty_list, FFYP_coordinator, Fproject_list, Frequest_list, and Fstudent_list
+
+During runtime:
+- The external CSV records in "databases" are updated when a user logs out
+- If an unexpected exception occurs, please note that all actions executed during the current login session will not be saved
+
+End of program:
+- To reset the records, simply delete all data from Fproject_list and Frequest_list
+- Please also check the other 3 files to ensure that the password column contains "password" for all users and set DeregStatus to 0 in Fstudent_list
