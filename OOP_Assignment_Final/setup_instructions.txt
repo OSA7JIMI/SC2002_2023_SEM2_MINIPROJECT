@@ -9,3 +9,4 @@ During runtime:
 End of program:
 - To reset the records, simply delete all data from Fproject_list and Frequest_list
 - Please also check the other 3 files to ensure that the password column contains "password" for all users and set DeregStatus to 0 in Fstudent_list
+- Please do not delete particular rows in the CSV files as this will affect the indexing
