@@ -24,6 +24,7 @@ public class RequestAllocate extends Request{
 		Project p = DatabaseProjectAccessor.getProject(projectID);
 		if(p.getStatus()!=0) {
 			System.out.println("This project is not available");
+			return;
 		}
 		setpending(true);
 		settype(1);
